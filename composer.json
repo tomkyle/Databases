@@ -1,5 +1,8 @@
 {
     "name":        "tomkyle/database-servicelocator",
+
+    "replace": {"tomkyle/databases": "self.version"},
+
     "type":        "library",
     "description": "A nifty Database ServiceLocator, Pimple-style",
     "keywords":   ["dependency injection", "database", "service locator", "mysql", "aura", "sql"],
