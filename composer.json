@@ -13,7 +13,7 @@
     ],
     "require": {
         "php":           ">=5.4.0",
-        "pimple/pimple": "v1.1.0"
+        "pimple/pimple": "dev-master"
     },
     "require-dev": {
         "aura/sql":     "~1.3"
