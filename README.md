@@ -6,28 +6,30 @@ DatabaseServiceLocator combines the Singleton-behaving factories provided by [Pi
 
 ##In a Nutshell
 
-1. **Describe database** connections in plain config object
+1. **Describe database** connections, e.g. in plain config object
 2. Setup **DatabaseServiceLocator** with config object 
-3. Choose database, get **ConnectionFactory**
-4. Use database connection, provided by the **driver you like** to work with
+3. Get **ConnectionFactory** from ServiceLocator
+4. **Grab your connection** for the database API you like
 
-[Show it already](#usage)
+[Show it already!](#usage)
 
 
 
 ##Requirements
 
 ###Dependencies
-This library requires PHP 5.4 or later, and has no userland dependencies except from Fabien Potencier's [Pimple](https://github.com/fabpot/Pimple) library.
+This library requires PHP 5.4 or later, and has no dependencies except from Fabien Potencier's [Pimple](https://github.com/fabpot/Pimple) library. 
+
+
 
 ###Installation
 
-This library is installable and autoloadable via Composer with the following
-`require` element in your `composer.json` file:
+This library is installable and autoloadable via Composer. During installation, Composer will suggest to install [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0), if you have not already. Install from command line or add the following `require` element in your `composer.json` file:
 
     "require": {
         "tomkyle/databases": "dev-master"
     }
+
 
 ##Wait, isn't this an Anti-Pattern?
 **Yes, if you use** the DatabaseServiceLocator as dependency inside your classes, injecting it in constructors or Setter methods, type-hinting against it or not.
