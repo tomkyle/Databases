@@ -24,6 +24,13 @@
  */
 namespace tomkyle\Databases;
 
+
+/**
+ * DatabaseConfigInterface
+ *
+ * Prescribes the getter methods (and return types)
+ * any DatabaseConfig instances must provide.
+ */
 interface DatabaseConfigInterface
 {
 
@@ -33,22 +40,9 @@ interface DatabaseConfigInterface
     public function getUser();
 
 /**
- * @param  string $user
- * @return object Fluent interface
- */
-    public function setUser( $user );
-
-/**
  * @return string
  */
     public function getPassword();
-
-/**
- * @param  string $password
- * @return object Fluent interface
- */
-    public function setPassword( $password );
-
 
 
 /**
@@ -56,35 +50,17 @@ interface DatabaseConfigInterface
  */
     public function getHost();
 
-/**
- * @param  string $host
- * @return object Fluent interface
- */
-    public function setHost( $host );
-
 
 /**
  * @return string
  */
     public function getType();
 
-/**
- * @param  string $type
- * @return object Fluent interface
- */
-    public function setType( $type );
-
 
 /**
  * @return string
  */
     public function getDatabase();
-
-/**
- * @param  string $database
- * @return object Fluent interface
- */
-    public function setDatabase( $database );
 
 
 /**
@@ -93,20 +69,8 @@ interface DatabaseConfigInterface
     public function getCharset();
 
 /**
- * @param  string $charset
- * @return object Fluent interface
- */
-    public function setCharset( $charset );
-
-
-/**
  * @return int
  */
     public function getPort();
 
-/**
- * @param  string $port
- * @return object Fluent interface
- */
-    public function setPort( $port );
 }
