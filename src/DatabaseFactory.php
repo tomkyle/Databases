@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of tomkyle/DatabaseServiceLocator.
+ * This file is part of tomkyle/Databases.
  *
  * Copyright (c) 2014 Carsten Witt
  *
@@ -22,17 +22,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace tomkyle\Databases;
 
 use \Pimple;
-use \Aura\Sql\ConnectionFactory;
+use \Aura\Sql\ConnectionFactory as AuraConnectionFactory;
 
 
+/**
+ * DatabaseFactory
+ *
+ * Provides you with methods for creating generic connections
+ * to PDO, mysqli and Aura.SQL. Requires Pimple as base class.
+ *
+ * Configuration and Usage:
+ *
+ *    <?php
+ *    // Describe your Database (somehow)
+ *    $description = new \StdClass;
+ *    $description->host     =  "db_host";
+ *    $description->database =  "db_name";
+ *    $description->user     =  "db_user";
+ *    $description->pass     =  "db_pass"; // and so on
+ *
+ *    // Create factory
+ *    $factory = new DatabaseFactory ( new DatabaseConfig ( $description ) );
+ *
+ *    // Grab your connection
+ *    $aura   = $factory->getAuraSql();
+ *    $pdo    = $factory->getPdo();
+ *    $mysqli = $factory->getMysqli();
+ *    ?>
+ */
 class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 {
-    protected $config;
 
+
+/**
+ * @param DatabaseConfigInterface $config  Database description instance
+ * @param array                   $options Unused yet, defaults to blank array.
+ * @uses  \Pimple::__constrcut()
+ * @uses  defineServices()
+ */
     public function __construct( DatabaseConfigInterface $config, $options = [] )
     {
         parent::__construct( [
@@ -45,18 +75,35 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 
 
 
+/**
+ * Defines how the connections are created (with Pimple, to be concise).
+ *
+ * The method makes use of Pimple API.
+ *
+ * Note that for Aura.SQL connections, a generic PDO connection is used.
+ * For details, see http://harikt.com/blog/2012/12/06/node-227/
+ *
+ * @return DatabaseFactory Fluent Interface
+ * @uses   \Aura\Sql\ConnectionFactory
+ * @uses   \Aura\Sql\ConnectionFactory::newInstance()
+ * @uses   \Aura\Sql\ConnectionFactory::setPdo()
+ * @uses   DatabaseConfigInterface::getType()
+ * @uses   DatabaseConfigInterface::getDatabase()
+ * @uses   DatabaseConfigInterface::getHost()
+ * @uses   DatabaseConfigInterface::getPort()
+ * @uses   DatabaseConfigInterface::getCharset()
+ * @uses   DatabaseConfigInterface::getUser()
+ * @uses   DatabaseConfigInterface::getPassword()
+ */
     protected function defineServices()
     {
         $this['aura.connectionfactory'] = function() {
-            return new ConnectionFactory;
+            return new AuraConnectionFactory;
         };
 
 
         $this['aura.sql'] = function( ) {
             $config = $this['config'];
-
-            // Use PDO instance, as described here:
-            // http://harikt.com/blog/2012/12/06/node-227/
             $aura = $this['aura.connectionfactory']->newInstance( $config->getType() );
             $aura->setPdo( $this['pdo'] );
             return $aura;
@@ -93,6 +140,8 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
             $mysqli->set_charset( $config->getCharset() );
             return $mysqli;
         };
+
+        return $this;
     }
 
 
@@ -101,7 +150,7 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 
 
 /**
- * Returns a PDO instance.
+ * Returns a generic PDO instance.
  *
  * @api
  * @return \PDO
@@ -126,7 +175,7 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 
 
 /**
- * Returns a Mysqli instance.
+ * Returns a generic Mysqli instance.
  *
  * @api
  * @return \mysqli
