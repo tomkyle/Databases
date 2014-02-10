@@ -1,8 +1,6 @@
-#Database Service Location
+#DatabaseServiceLocator  
 
-This Pimple extension helps you setup and manage multiple database connections without instantiating them at once. Databases are represented by connection factories rather, providing easy access to any common kind of DB connection – the way you like and when you like. 
-
-DatabaseServiceLocator combines the Singleton-behaving factories provided by [Pimple](https://github.com/fabpot/Pimple) with a simplified creation of common database connections, such as [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL (v1)](https://github.com/auraphp/Aura.Sql/tree/master). 
+DatabaseServiceLocator is a ServiceLocator for generic database connections to common database APIs. As an extension of [Pimple](https://github.com/fabpot/Pimple), it combines the Singleton-behaving factories provided by Pimple with a simplified creation of connections to [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master). 
 
 ##In a Nutshell
 
