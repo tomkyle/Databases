@@ -40,10 +40,11 @@ namespace tomkyle\Databases;
  *    $description->user     =  "db_user";
  *    $description->pass     =  "db_pass"; // and so on
  *
+ *    // Setup Config instance:
  *    $config = new DatabaseConfig( $description );
  *
- *    // use with DatabaseFactory:
- *    $factory = new DatabaseFactory ( new DatabaseConfig ( $description ) );
+ *    // ...use with DatabaseFactory:
+ *    $factory = new DatabaseFactory( $config );
  *    ?>
  */
 

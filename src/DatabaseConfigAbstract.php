@@ -24,6 +24,15 @@
  */
 namespace tomkyle\Databases;
 
+
+/**
+ * DatabaseConfigAbstract
+ *
+ * Implements the getter methods of DatabaseConfigInterface
+ * and appropriate setter methods as well.
+ *
+ * Fluent interface: All setter methods return the instance itself.
+ */
 abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
 {
 
