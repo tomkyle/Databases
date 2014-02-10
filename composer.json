@@ -1,0 +1,27 @@
+{
+    "name":        "tomkyle/databases",
+    "type":        "library",
+    "description": "A nifty Database ServiceLocator, Pimple-style",
+    "keywords":   ["dependency injection", "database", "service locator", "mysql", "aura", "sql"],
+
+    "license": "MIT",
+    "authors": [
+        {
+            "name":  "Carsten Witt",
+            "email": "tomkyle@posteo.de"
+        }
+    ],
+    "require": {
+        "php":           ">=5.4.0",
+        "pimple/pimple": "v1.1"
+    },
+    "require-dev": {
+        "aura/sql":     "~1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "tomkyle\\Databases\\": "src/"
+        }
+    }
+
+}
