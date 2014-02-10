@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of tomkyle/DatabaseServiceLocator.
+ * This file is part of tomkyle/Databases.
  *
  * Copyright (c) 2014 Carsten Witt
  *
@@ -24,6 +24,12 @@
  */
 namespace tomkyle\Databases;
 
+
+/**
+ * DatabaseFactoryInterface
+ *
+ * Prescribes methods for providing generic database connections.
+ */
 interface DatabaseFactoryInterface
 {
 
