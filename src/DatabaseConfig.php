@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of tomkyle/DatabaseServiceLocator.
+ * This file is part of tomkyle/Databases.
  *
  * Copyright (c) 2014 Carsten Witt
  *
@@ -24,23 +24,54 @@
  */
 namespace tomkyle\Databases;
 
+
+/**
+ * DatabaseConfig
+ *
+ * Configuration object that represents your database description.
+ *
+ * Configuration and Usage:
+ *
+ *    <?php
+ *    // Describe your Database (somehow)
+ *    $description = new \StdClass;
+ *    $description->host     =  "db_host";
+ *    $description->database =  "db_name";
+ *    $description->user     =  "db_user";
+ *    $description->pass     =  "db_pass"; // and so on
+ *
+ *    $config = new DatabaseConfig( $description );
+ *
+ *    // use with DatabaseFactory:
+ *    $factory = new DatabaseFactory ( new DatabaseConfig ( $description ) );
+ *    ?>
+ */
+
 class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInterface
 {
 
-
+/**
+ * Default charset: `utf8`
+ * @var string
+ */
     public $charset  = 'utf8';
+
+/**
+ * Default type: `mysql`
+ * @var string
+ */
+
     public $type     = 'mysql';
+
+/**
+ * Default connection port: `3306` (MySQL)
+ * @var int
+ */
     public $port     = 3306;
 
 
 /**
- * @param  string $host
- * @param  string $database
- * @param  string $user
- * @param  string $pass
- * @param  string $charset Default: "utf8"
- * @param  string $type    Default: "mysql"
- * @param  string $port    Default: "3306"
+ * @param  \StdClass|array $config
  * @uses   apply()
  */
     public function __construct( $config = null)
@@ -52,9 +83,12 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
 
 
 /**
- * @param  array|object $config configuration object
+ * Applies a configuration to this object.
+ * Accepts an array or `StdClass` instance, e.g. from JSON.
  *
- * @return DatabaseConfig
+ * @param  array|object $config Database description.
+ *
+ * @return DatabaseConfig Fluent Interface
  * @uses   setType()
  * @uses   setHost()
  * @uses   setPort()
@@ -72,15 +106,16 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
             return false;
         }
 
-        if (isset($config->host))     $this->setHost( $config->host );
+        if (isset($config->host))     $this->setHost(     $config->host );
         if (isset($config->database)) $this->setDatabase( $config->database );
-        if (isset($config->user))     $this->setUser( $config->user );
-        if (isset($config->username)) $this->setUser( $config->username );
+        if (isset($config->user))     $this->setUser(     $config->user );
+        if (isset($config->username)) $this->setUser(     $config->username );
         if (isset($config->password)) $this->setPassword( $config->password );
         if (isset($config->pass))     $this->setPassword( $config->pass );
         if (isset($config->charset))  $this->setCharset(  $config->charset );
-        if (isset($config->type))     $this->setType( $config->type );
-        if (isset($config->port))     $this->setPort( $config->port );
+        if (isset($config->type))     $this->setType(     $config->type );
+        if (isset($config->port))     $this->setPort(     $config->port );
+
         return $this;
     }
 
