@@ -11,6 +11,9 @@ DatabaseServiceLocator combines the Singleton-behaving factories provided by [Pi
 3. Choose database, get **ConnectionFactory**
 4. Use database connection, provided by the **driver you like** to work with
 
+[Show it already](#usage)
+
+
 
 ##Requirements
 
@@ -146,7 +149,7 @@ echo get_class( $aura );
 ####How far are the connections configured?
 Beside from their charset, the connections “ex factory” are not configured specially. So if you like to change the default fetch mode or (think of `PDO::setAttribute`), you may want to configure it yourself. Remember, each connection is generic!
 
-####What about Aura.SQL Version 2?
+####What about Aura.SQL v2 ?
 Currently, DatabaseServiceLocator supports [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0). With Aura v2 coming soon, Aura.SQL splits up into three modules *Aura.SQL v2  Aura.SQL_Query* and *Aura.SQL_Schema* – see Paul M. Jones' article [“A Peek At Aura v2 -- Aura.Sql and ExtendedPdo”](http://auraphp.com/blog/2013/10/21/aura-sql-v2-extended-pdo/). 
 
 I will try to add v2 support as soon as v2 has become stable or standard, and I got used to it. Just in case you already are, you are invited to fork your own DatabaseServiceLocator :-)
