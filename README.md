@@ -52,10 +52,11 @@ This way, when things go wrong, they do so outside your business classes (Invers
 
 ##Configuration
 
-Assume your project deals with a couple of different databases, with credentials and stuff in a JSON config file. First, describe each connection with config options (see [full list below](#configuration-options)), and then, simply parse it contents into a `StdClass` object, like this:
+Assume your project deals with a couple of different databases, with credentials and stuff in a JSON config file. First, describe each connection with config options (see [full list below](#configuration-options)), like this:
 
-```php
-$json_string = '{
+###Sample config file
+```json
+{
   "first_db" : {
     "host":     "db_host",
     "database": "db_name",
@@ -70,8 +71,7 @@ $json_string = '{
     "type":     "not_mysql"
     "charset":  "utf8"
   }
-}';
-$my_databases = json_decode( $json_string );
+}
 ```
 
 ###Configuration options
@@ -87,10 +87,13 @@ Currently, the following configuration elements are supported:
 
 
 ##Usage
-Simply create a new instance of `DatabaseServiceLocator` and pass in your database descriptions object from above:
+
+1. Parse config contents into a `StdClass` object
+2. Create a new instance of `DatabaseServiceLocator`, passing in your database descriptions object from above:
 
 ```php
-$databases = new DatabaseServiceLocator( $my_databases );
+$config = json_decode( file_get_contents( 'config.json' ));
+$databases = new DatabaseServiceLocator( $config );
 
 // 1. Get DatabaseFactory instance, Pimple-style:
 $foo_factory = $databases['first_db'];
