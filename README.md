@@ -142,8 +142,8 @@ $aura->setAttribute( \PDO::ATTR_DEFAULT_FETCH_MODE,  \PDO::FETCH_OBJ);
 ####mysqli Connections
 
 ```php
-$mysql = $foo_factory->getMysqli();
-echo get_class( $aura );
+$mysqli = $foo_factory->getMysqli();
+echo get_class( $mysqli );
 // "mysqli"
 ```
 
