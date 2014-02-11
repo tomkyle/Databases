@@ -1,11 +1,11 @@
 {
     "name":        "tomkyle/databases",
 
-    "replace": {"tomkyle/databases": "self.version"},
+    "replace": {"tomkyle/database-servicelocator": "self.version"},
 
     "type":        "library",
-    "description": "A nifty Database ServiceLocator, Pimple-style",
-    "keywords":   ["dependency injection", "database", "service locator", "mysql", "aura", "sql"],
+    "description": "A database service locator for generic database connections, Pimple-style",
+    "keywords":   ["mysql", "pdo", "aura", "sql", "php", "dic", "database", "service locator", "mysqli"],
 
     "license": "MIT",
     "authors": [
