@@ -1,6 +1,6 @@
-#DatabaseServiceLocator  
+#Databases Service Locator  
 
-DatabaseServiceLocator is a ServiceLocator for generic database connections to common database APIs. As an extension of [Pimple](https://github.com/fabpot/Pimple), it combines the Singleton-behaving factories provided by Pimple with a simplified creation of connections to [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master). 
+DatabaseServiceLocator is a service locator for generic connections to common database APIs. As an extension of [Pimple](https://github.com/fabpot/Pimple), it combines the Singleton-behaving factories provided by Pimple with a simplified creation of connections to [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master). 
 
 ##In a Nutshell
 
