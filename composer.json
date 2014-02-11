@@ -1,7 +1,6 @@
 {
     "name":        "tomkyle/databases",
 
-    "replace": {"tomkyle/database-servicelocator": "self.version"},
 
     "type":        "library",
     "description": "A database service locator for generic database connections, Pimple-style",
