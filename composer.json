@@ -1,5 +1,5 @@
 {
-    "name":        "tomkyle/database-servicelocator",
+    "name":        "tomkyle/databases",
 
     "replace": {"tomkyle/databases": "self.version"},
 
