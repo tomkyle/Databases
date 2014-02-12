@@ -144,6 +144,8 @@ If a class needs a special database connection, let's say PDO, here's how:
 
 This way, when things go wrong, they do so outside your business classes (Inversion of Control principle).
 
+Paul M. Jones recently covers this topic in his recently published article [“What Application Layer Does A DI Container Belong In?”](http://paul-m-jones.com/archives/5914).
+
 
 ##Questions and Answers
 
