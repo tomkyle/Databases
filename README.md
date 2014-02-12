@@ -29,24 +29,6 @@ This library is installable and autoloadable via Composer. During installation, 
     }
 
 
-##Wait, isn't this an Anti-Pattern?
-**Yes, if you use** the DatabaseServiceLocator as dependency inside your classes, injecting it in constructors or Setter methods, type-hinting against it or not.
-
-**No, if you use** it in your composition root or configuration environment.
-If a class needs a special database connection, let's say PDO, here's how: 
-
-1. Get your connection factory from DatabaseServiceLocator
-2. Let it create a PDO connection for you 
-3. Inject the resulting PDO. 
-
-…and the next class, relying on Aura.SQL dependencies:
-
-4. Take the very same connection factory instance (remember: Singleton!)
-5. Let it create a Aura.SQL connection for you
-6. Inject the resulting Aura.SQL Mysql Connection. 
-
-This way, when things go wrong, they do so outside your business classes (Inversion of Control principle).
-
 
 
 
@@ -147,12 +129,33 @@ echo get_class( $mysqli );
 // "mysqli"
 ```
 
+###Best practice
+If a class needs a special database connection, let's say PDO, here's how: 
+
+1. Get your connection factory from DatabaseServiceLocator
+2. Let it create a PDO connection for you 
+3. Inject the resulting PDO. 
+
+…and the next class, relying on Aura.SQL dependencies:
+
+4. Take the very same connection factory instance (remember: Singleton!)
+5. Let it create a Aura.SQL connection for you
+6. Inject the resulting Aura.SQL Mysql Connection. 
+
+This way, when things go wrong, they do so outside your business classes (Inversion of Control principle).
+
+
 ##Questions and Answers
 
-####How far are the connections configured?
+
+###Wait, isn't this an Anti-Pattern?
+**Yes, if you use** the DatabaseServiceLocator as dependency inside your classes, injecting it in constructors or Setter methods, type-hinting against it or not. **No, if you use** it in your composition root or configuration environment.
+
+
+###How far are the connections configured?
 Beside from their charset, the connections “ex factory” are not configured specially. So if you like to change the default fetch mode or (think of `PDO::setAttribute`), you may want to configure it yourself. Remember, each connection is generic!
 
-####What about Aura.SQL v2 ?
+###What about Aura.SQL v2 ?
 Currently, DatabaseServiceLocator supports [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0). With Aura v2 coming soon, Aura.SQL splits up into three modules *Aura.SQL v2  Aura.SQL_Query* and *Aura.SQL_Schema* – see Paul M. Jones' article [“A Peek At Aura v2 -- Aura.Sql and ExtendedPdo”](http://auraphp.com/blog/2013/10/21/aura-sql-v2-extended-pdo/). 
 
 I will try to add v2 support as soon as v2 has become stable or standard, and I got used to it. Just in case you already are, you are invited to fork your own DatabaseServiceLocator :-)
