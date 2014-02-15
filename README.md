@@ -71,7 +71,10 @@ Currently, the following configuration elements are supported:
 ##Usage
 
 1. Parse config contents into a `StdClass` object
-2. Create a new instance of `DatabaseServiceLocator`, passing in your database descriptions object from above:
+2. Create a new instance of `DatabaseServiceLocator`,  
+   passing in your database descriptions object from above
+3. Get your Factory instance for your database
+4. Let factory create generic connection 
 
 ```php
 $config = json_decode( file_get_contents( 'config.json' ));
@@ -92,16 +95,18 @@ $bar_mysqli = $databases['second_db']->getMysqli();
 Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton instance of `DatabaseFactory`:
 
 ```php
-$foo_factory = $databases['foo_db'];
+$foo_factory = $databases['foo_db'];  
 echo get_class( $foo_factory );
 // "DatabaseFactory"
 ```
 
-Each `DatabaseFactory` instance works as a Connection factory that provides and instantiates different kinds of Singleton database connections:
+Each `DatabaseFactory` instance works as a Connection factory that provides and instantiates different kinds of Singleton database connections. You may grab your connection either by calling a getter Method or access it as array key (the Pimple way):
 
 ####PDO Connections
 
 ```php
+$pdo = $foo_factory['pdo'];
+// or 
 $pdo = $foo_factory->getPdo();
 echo get_class( $pdo );
 // "PDO"
@@ -110,6 +115,8 @@ echo get_class( $pdo );
 ####Aura.SQL Connections
 
 ```php
+$aura = $foo_factory['aura.sql'];
+// or 
 $aura = $foo_factory->getAuraSql();
 echo get_class( $aura );
 // "Aura\Sql\Connection\Mysql", for example
@@ -124,6 +131,8 @@ $aura->setAttribute( \PDO::ATTR_DEFAULT_FETCH_MODE,  \PDO::FETCH_OBJ);
 ####mysqli Connections
 
 ```php
+$mysqli = $foo_factory['mysqli'];
+// or 
 $mysqli = $foo_factory->getMysqli();
 echo get_class( $mysqli );
 // "mysqli"
