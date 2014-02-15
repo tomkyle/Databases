@@ -91,6 +91,15 @@ $bar_pdo    = $databases['second_db']->getPdo();
 $bar_mysqli = $databases['second_db']->getMysqli();
 ```
 
+####Shortcut/Oneliner
+Since both ServiceLocator and Factories are Pimple extensions, you can get your connection in one call as well:
+
+```php
+$databases = new DatabaseServiceLocator( $config );
+$foo_pdo = $databases['first_db']['pdo'];
+```
+
+
 ###Retrieving connections
 Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton instance of `DatabaseFactory`:
 
