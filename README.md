@@ -50,7 +50,7 @@ Assume your project deals with a couple of different databases, with credentials
     "database": "other_db",
     "user":     "other_user",
     "pass":     "other_pass",
-    "type":     "not_mysql"
+    "type":     "not_mysql",
     "charset":  "utf8"
   }
 }
