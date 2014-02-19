@@ -39,15 +39,20 @@ class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInt
 /**
  * Creates database factories in 'Pimple service' manner.
  *
- * @param array|\StdClass Collection of Database details
- * @param string          FQDN of Database Config class, default: "\tomkyle\Databases\DatabaseConfig"
+ * @param   array|\StdClass Collection of Database details, as associative array
+ * @throws  InvalidArgumentException
  */
-    public function __construct( $databases, $php_config_class = '\tomkyle\Databases\DatabaseConfig' )
+    public function __construct( $databases )
     {
-        foreach($databases as $database => $config):
+        if (!is_array( $databases )
+        and !$databases instanceOf \StdClass) {
+            throw new \InvalidArgumentException("Associative Array or StdClass expected.");
+        }
 
-            $this[ $database ] = function() use ($config, $php_config_class) {
-                return new DatabaseFactory( new $php_config_class($config) );
+        foreach($databases as $database => $raw_config):
+
+            $this[ $database ] = function() use ( $raw_config ) {
+                return new DatabaseFactory( new DatabaseConfig( $raw_config ) );
             };
 
         endforeach;
