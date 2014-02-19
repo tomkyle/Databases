@@ -18,10 +18,6 @@
         "pimple/pimple": "dev-master"
     },
 
-    "require-dev": {
-        "phpunit/phpunit": "~3.7"
-    },
-
     "suggest": {
         "aura/sql": "Aura.SQL – Provides adapters for SQL database access around PDO"
     },
