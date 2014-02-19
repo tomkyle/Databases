@@ -17,9 +17,15 @@
         "php":           ">=5.4.0",
         "pimple/pimple": "dev-master"
     },
+
+    "require-dev": {
+        "phpunit/phpunit": "~3.7"
+    },
+
     "suggest": {
         "aura/sql": "Aura.SQL – Provides adapters for SQL database access around PDO"
     },
+
     "autoload": {
         "psr-4": {
             "tomkyle\\Databases\\": "src/"
