@@ -12,8 +12,7 @@ DatabaseServiceLocator is a service locator for generic connections to common da
 [Show it already!](#usage)
 
 ##A word on testing
-
-I am a bloody beginner with PHPUnit/TravisCI and for now have got no clue about testing. Thus, the `tests` directory does not contain any useful tests, and you better not trust that green badge too much – unless I am able to write proper tests. Any hints regarding this issue will be appreciated :-)
+Besides tests for instantiation, the `tests` directory does not contain very much tests yet. The reason is, I am a bloody but hooked beginner with PHPUnit/TravisCI. So any useful hint will be appreciated :-)
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
 
