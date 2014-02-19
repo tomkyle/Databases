@@ -9,11 +9,10 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="tests/bootstrap.php"
 >
     <testsuites>
         <testsuite name="Databases Test Suite">
-            <directory>./tests/Databases/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
