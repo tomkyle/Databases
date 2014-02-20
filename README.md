@@ -187,11 +187,15 @@ I will try to add v2 support as soon as v2 has become stable or standard, and I 
 ##Automated tests
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png)](https://coveralls.io/r/tomkyle/Databases)
 
 Currently, the test suite covers:
 
 - Instantiation of `DatabaseServiceLocator` with both valid and invalid arguments.
-- more to come (I am a bloody but hooked beginner with PHPUnit/TravisCI)
+- Instantiation of `DatabaseFactory` with with both valid and invalid arguments.
+- Instantiation of `DatabaseConfig` with with both valid and invalid arguments.
+- more detailled test to come (I am a bloody but hooked beginner with PHPUnit/TravisCI)
 
-Any useful hint about what and how to test next will be appreciated.
+As of 20.2., I dont get it how to manage that 'code coverage' thingy. Any useful hint regarding this orut what and 
+how to test next will be appreciated.
 
