@@ -101,7 +101,7 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
             $config = (object) $config;
         }
         if (!$config instanceOf \StdClass) {
-            return false;
+            throw new \InvalidArgumentException("Associative Array or StdClass expected.");
         }
 
         if (isset($config->host))     $this->setHost(     $config->host );
