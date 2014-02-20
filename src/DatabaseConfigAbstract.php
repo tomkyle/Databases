@@ -24,7 +24,6 @@
  */
 namespace tomkyle\Databases;
 
-
 /**
  * DatabaseConfigAbstract
  *
@@ -71,8 +70,6 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  */
     public $port;
 
-
-
 /**
  * @return string
  */
@@ -85,14 +82,12 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $host
  * @return object Fluent interface
  */
-    public function setHost( $host )
+    public function setHost($host)
     {
         $this->host = $host;
+
         return $this;
     }
-
-
-
 
 /**
  * @return string
@@ -106,14 +101,12 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $type
  * @return object Fluent interface
  */
-    public function setType( $type )
+    public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
-
-
-
 
 /**
  * @return string
@@ -127,9 +120,10 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $database
  * @return object Fluent interface
  */
-    public function setDatabase( $database )
+    public function setDatabase($database)
     {
         $this->database = $database;
+
         return $this;
     }
 
@@ -145,14 +139,12 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $user
  * @return object Fluent interface
  */
-    public function setUser( $user )
+    public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
-
-
-
 
 /**
  * @return string
@@ -166,14 +158,12 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $password
  * @return object Fluent interface
  */
-    public function setPassword( $password )
+    public function setPassword($password)
     {
         $this->password = $password;
+
         return $this;
     }
-
-
-
 
 /**
  * @return string
@@ -187,14 +177,12 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $charset
  * @return object Fluent interface
  */
-    public function setCharset( $charset )
+    public function setCharset($charset)
     {
         $this->charset = $charset;
+
         return $this;
     }
-
-
-
 
 /**
  * @return string
@@ -208,11 +196,11 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  * @param  string $port
  * @return object Fluent interface
  */
-    public function setPort( $port )
+    public function setPort($port)
     {
         $this->port = $port;
+
         return $this;
     }
-
 
 }

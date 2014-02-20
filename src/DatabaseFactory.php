@@ -27,7 +27,6 @@ namespace tomkyle\Databases;
 use \Pimple;
 use \Aura\Sql\ConnectionFactory as AuraConnectionFactory;
 
-
 /**
  * DatabaseFactory
  *
@@ -56,14 +55,13 @@ use \Aura\Sql\ConnectionFactory as AuraConnectionFactory;
 class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 {
 
-
 /**
  * @param DatabaseConfigInterface $config  Database description instance
  * @param array                   $options Unused yet, defaults to blank array.
  * @uses  \Pimple::__constrcut()
  * @uses  defineServices()
  */
-    public function __construct( DatabaseConfigInterface $config, $options = [] )
+    public function __construct(DatabaseConfigInterface $config, $options = [])
     {
         parent::__construct( [
             'config'  => $config,
@@ -72,8 +70,6 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 
         $this->defineServices();
     }
-
-
 
 /**
  * Defines how the connections are created (with Pimple, to be concise).
@@ -97,22 +93,22 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
  */
     protected function defineServices()
     {
-        $this['aura.connectionfactory'] = function() {
+        $this['aura.connectionfactory'] = function () {
             return new AuraConnectionFactory;
         };
 
-
-        $this['aura.sql'] = function( ) {
+        $this['aura.sql'] = function () {
             $config = $this['config'];
             $aura = $this['aura.connectionfactory']->newInstance( $config->getType() );
             $aura->setPdo( $this['pdo'] );
+
             return $aura;
         };
 
-
-        $this['pdo'] = function( ) {
+        $this['pdo'] = function () {
             $config = $this['config'];
             $dsn = "%s:dbname=%s;host=%s;port=%s;charset=%s";
+
             return new \PDO(
                 sprintf($dsn,
                 $config->getType(),
@@ -126,8 +122,7 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
             );
         };
 
-
-        $this['mysqli'] = function() {
+        $this['mysqli'] = function () {
             $config = $this['config'];
 
             $mysqli = mysqli_connect(
@@ -138,16 +133,12 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
                 $config->getPort()
             );
             $mysqli->set_charset( $config->getCharset() );
+
             return $mysqli;
         };
 
         return $this;
     }
-
-
-
-
-
 
 /**
  * Returns a generic PDO instance.
@@ -160,8 +151,6 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
         return $this['pdo'];
     }
 
-
-
 /**
  * Returns a Aura.SQL Database Connection
  *
@@ -172,7 +161,6 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
     {
         return $this['aura.sql'];
     }
-
 
 /**
  * Returns a generic Mysqli instance.

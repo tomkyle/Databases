@@ -5,38 +5,34 @@ use \tomkyle\Databases\DatabaseServiceLocator;
 
 class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
 {
-
-
     /**
      * Challenges the DatabaseServiceLocator ctor with invalid arguments.
      *
      * @expectedException InvalidArgumentException
      * @dataProvider      provideInvalidCtorArguments
      */
-    public function testThrowsInvalidArgumentExceptionOnNotArrayOrStdClass( $invalid )
+    public function testThrowsInvalidArgumentExceptionOnNotArrayOrStdClass($invalid)
     {
         new DatabaseServiceLocator( $invalid );
     }
-
 
     /**
      * Provides valid arguments to DatabaseServiceLocator ctor.
      *
      * @dataProvider provideValidCtorArguments
      */
-    public function testValidConfigOnCtor( $valid )
+    public function testValidConfigOnCtor($valid)
     {
         $this->assertInstanceOf(
             '\tomkyle\Databases\DatabaseServiceLocator',
             new DatabaseServiceLocator( $valid ));
     }
 
-
-
     /**
      * Returns a set of invalid (wrong) ctor arguments.
      */
-    public function provideInvalidCtorArguments() {
+    public function provideInvalidCtorArguments()
+    {
         return array(
             array( 1 ),
             array( 2.4 ),
@@ -45,20 +41,16 @@ class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
-
     /**
      * Returns a set of valid ctor arguments.
      */
-    public function provideValidCtorArguments() {
+    public function provideValidCtorArguments()
+    {
         return array(
             array( $this->createTwoDimArrayConfigArgument() ),
             array( $this->createStdClassConfigArgument() )
         );
     }
-
-
-
 
     /**
      * Creates a valid, two-dimensional ctor argument.
@@ -85,7 +77,6 @@ class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-
     /**
      * Creates a valid StdClass ctor argument.
      *
@@ -110,6 +101,5 @@ class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
             }
         }');
     }
-
 
 }

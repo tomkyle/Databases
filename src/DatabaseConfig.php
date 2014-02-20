@@ -24,7 +24,6 @@
  */
 namespace tomkyle\Databases;
 
-
 /**
  * DatabaseConfig
  *
@@ -70,18 +69,16 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
  */
     public $port     = 3306;
 
-
 /**
  * @param  \StdClass|array $config
  * @uses   apply()
  */
-    public function __construct( $config = null)
+    public function __construct($config = null)
     {
         if (isset( $config )) {
             $this->apply( $config );
         }
     }
-
 
 /**
  * Applies a configuration to this object.
@@ -98,7 +95,7 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
  * @uses   setDatabase()
  * @uses   setCharset()
  */
-    public function apply( $config )
+    public function apply($config)
     {
         if (is_array($config)) {
             $config = (object) $config;
@@ -116,11 +113,7 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
         if (isset($config->charset))  $this->setCharset(  $config->charset );
         if (isset($config->type))     $this->setType(     $config->type );
         if (isset($config->port))     $this->setPort(     $config->port );
-
         return $this;
     }
-
-
-
 
 }

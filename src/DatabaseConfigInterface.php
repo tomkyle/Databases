@@ -24,7 +24,6 @@
  */
 namespace tomkyle\Databases;
 
-
 /**
  * DatabaseConfigInterface
  *
@@ -44,24 +43,20 @@ interface DatabaseConfigInterface
  */
     public function getPassword();
 
-
 /**
  * @return string
  */
     public function getHost();
-
 
 /**
  * @return string
  */
     public function getType();
 
-
 /**
  * @return string
  */
     public function getDatabase();
-
 
 /**
  * @return string

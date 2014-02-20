@@ -24,7 +24,6 @@
  */
 namespace tomkyle\Databases;
 
-
 /**
  * DatabaseFactoryInterface
  *
@@ -40,14 +39,12 @@ interface DatabaseFactoryInterface
  */
     public function getPdo();
 
-
 /**
  * Returns a Aura.SQL Database Connection
  *
  * @return \Aura\Sql\Connection\AbstractConnection
  */
     public function getAuraSql();
-
 
 /**
  * Returns a Mysqli instance.

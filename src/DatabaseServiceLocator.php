@@ -26,8 +26,6 @@ namespace tomkyle\Databases;
 
 use \Pimple;
 
-
-
 /**
  * DatabaseServiceLocator - Main class
  *
@@ -42,7 +40,7 @@ class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInt
  * @param   array|\StdClass Collection of Database details, as associative array
  * @throws  InvalidArgumentException
  */
-    public function __construct( $databases )
+    public function __construct($databases)
     {
         if (!is_array( $databases )
         and !$databases instanceOf \StdClass) {
@@ -51,13 +49,11 @@ class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInt
 
         foreach($databases as $database => $raw_config):
 
-            $this[ $database ] = function() use ( $raw_config ) {
+            $this[ $database ] = function () use ($raw_config) {
                 return new DatabaseFactory( new DatabaseConfig( $raw_config ) );
             };
 
         endforeach;
     }
-
-
 
 }
