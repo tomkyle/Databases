@@ -2,6 +2,8 @@
 
 DatabaseServiceLocator is a service locator for generic connections to common database APIs. As an extension of [Pimple](https://github.com/fabpot/Pimple), it combines the Singleton-behaving factories provided by Pimple with a simplified creation of connections to [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master). 
 
+[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
+
 ##In a Nutshell
 
 1. **Describe database** connections, e.g. in plain config object
@@ -10,12 +12,6 @@ DatabaseServiceLocator is a service locator for generic connections to common da
 4. **Grab your connection** for the database API you like
 
 [Show it already!](#usage)
-
-##A word on testing
-Besides tests for instantiation, the `tests` directory does not contain very much tests yet. The reason is, I am a bloody but hooked beginner with PHPUnit/TravisCI. So any useful hint will be appreciated :-)
-
-[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
-
 
 
 ##Requirements
@@ -186,4 +182,15 @@ Currently, DatabaseServiceLocator supports [Aura.SQL v1.3](http://github.com/aur
 I will try to add v2 support as soon as v2 has become stable or standard, and I got used to it. Just in case you already are, you are invited to fork your own DatabaseServiceLocator :-)
 
 
+
+##Automated tests
+
+[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
+
+Currently, the test suite covers:
+
+- Instantiation of `DatabaseServiceLocator` with both valid and invalid arguments.
+- more to come (I am a bloody but hooked beginner with PHPUnit/TravisCI)
+
+Any useful hint about what and how to test next will be appreciated.
 
