@@ -8,7 +8,7 @@ before_script:
 
 
 before_script:
-  - composer require satooshi/php-coveralls --dev --no-progress --prefer-source
+  - composer require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
 
 script:
   - cd tests
