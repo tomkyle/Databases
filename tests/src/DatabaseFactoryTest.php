@@ -2,7 +2,6 @@
 namespace tests;
 
 use \tomkyle\Databases\DatabaseFactory;
-use \tomkyle\Databases\DatabaseConfigInterface;
 use \tomkyle\Databases\DatabaseConfig;
 
 class DatabaseFactoryTest extends \PHPUnit_Framework_TestCase
@@ -20,7 +19,6 @@ class DatabaseFactoryTest extends \PHPUnit_Framework_TestCase
             new DatabaseFactory( $valid ));
     }
 
-
     /**
      * Returns a set of valid ctor arguments.
      */
@@ -31,9 +29,6 @@ class DatabaseFactoryTest extends \PHPUnit_Framework_TestCase
             array( new DatabaseConfig( $this->createStdClassConfigArgument() ))
         );
     }
-
-
-
 
     /**
      * Creates a valid ctor array argument.

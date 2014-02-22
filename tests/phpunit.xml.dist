@@ -11,6 +11,12 @@
         </testsuite>
     </testsuites>
 
+    <filter>
+      <whitelist processUncoveredFilesFromWhitelist="true">
+        <directory>../src</directory>
+      </whitelist>
+    </filter>
+
     <logging>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
         <log type="testdox-html"    target="build/logs/testdox.html"/>

@@ -6,6 +6,17 @@ use \tomkyle\Databases\DatabaseConfig;
 class DatabaseConfigTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Challenges the DatabaseConfig ctor with well-formed but incomplete arguments.
+     *
+     * @expectedException RuntimeException
+     * @dataProvider      provideIncompleteCtorArguments
+     */
+    public function testThrowsRuntimeExceptionOnIncompleteConfigData($incomplete)
+    {
+        new DatabaseConfig( $incomplete );
+    }
+
+    /**
      * Challenges the DatabaseConfig ctor with invalid arguments.
      *
      * @expectedException InvalidArgumentException
@@ -49,6 +60,39 @@ class DatabaseConfigTest extends \PHPUnit_Framework_TestCase
         return array(
             array( $this->createArrayConfigArgument() ),
             array( $this->createStdClassConfigArgument() )
+        );
+    }
+
+    /**
+     * Returns a set of well-fored but incomplete ctor arguments.
+     */
+    public function provideIncompleteCtorArguments()
+    {
+        return array(
+            array([
+                // 'host' =>     "localhost",
+                'database' => "database1",
+                'user' =>     "root",
+                'pass' =>     "secret"
+            ]),
+            array([
+                'host' =>     "localhost",
+                // 'database' => "database1",
+                'user' =>     "root",
+                'pass' =>     "secret"
+            ]),
+            array([
+                'host' =>     "localhost",
+                'database' => "database1",
+                // 'user' =>     "root",
+                'pass' =>     "secret"
+            ]),
+            array([
+                'host' =>     "localhost",
+                'database' => "database1",
+                'user' =>     "root",
+                // 'pass' =>     "secret"
+            ])
         );
     }
 
