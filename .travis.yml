@@ -5,10 +5,8 @@ php:
 
 before_script:
   - composer install
-
-
-before_script:
   - composer require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
+
 
 script:
   - cd tests

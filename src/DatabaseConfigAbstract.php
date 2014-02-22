@@ -70,8 +70,16 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
  */
     public $port;
 
+
+    /**
+     * Checks if the current configuration is valid.
+     * @return bool
+     */
+    abstract public function valid();
+
+
 /**
- * @return string
+ * @return string|null
  */
     public function getHost()
     {
@@ -79,7 +87,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @param  string $host
+ * @param  string|null $host
  * @return object Fluent interface
  */
     public function setHost($host)
@@ -89,27 +97,9 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
         return $this;
     }
 
-/**
- * @return string
- */
-    public function getType()
-    {
-        return $this->type;
-    }
 
 /**
- * @param  string $type
- * @return object Fluent interface
- */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-/**
- * @return string
+ * @return string|null
  */
     public function getDatabase()
     {
@@ -117,7 +107,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @param  string $database
+ * @param  string|null $database
  * @return object Fluent interface
  */
     public function setDatabase($database)
@@ -127,8 +117,10 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
         return $this;
     }
 
+
+
 /**
- * @return string
+ * @return string|null
  */
     public function getUser()
     {
@@ -136,7 +128,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @param  string $user
+ * @param  string|null $user
  * @return object Fluent interface
  */
     public function setUser($user)
@@ -147,7 +139,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @return string
+ * @return string|null
  */
     public function getPassword()
     {
@@ -155,7 +147,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @param  string $password
+ * @param  string|null $password
  * @return object Fluent interface
  */
     public function setPassword($password)
@@ -165,8 +157,35 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
         return $this;
     }
 
+
+
+
+
+
+
+
+
 /**
- * @return string
+ * @return string|null
+ */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+/**
+ * @param  string|null $type
+ * @return object Fluent interface
+ */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+/**
+ * @return string|null
  */
     public function getCharset()
     {
@@ -174,7 +193,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @param  string $charset
+ * @param  string|null $charset
  * @return object Fluent interface
  */
     public function setCharset($charset)
@@ -185,7 +204,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @return string
+ * @return string|null
  */
     public function getPort()
     {
@@ -193,7 +212,7 @@ abstract class DatabaseConfigAbstract implements DatabaseConfigInterface
     }
 
 /**
- * @param  string $port
+ * @param  string|null $port
  * @return object Fluent interface
  */
     public function setPort($port)

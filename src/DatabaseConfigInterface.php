@@ -33,6 +33,12 @@ namespace tomkyle\Databases;
 interface DatabaseConfigInterface
 {
 
+    /**
+     * Checks if the current configuration is valid.
+     * @return bool
+     */
+    public function valid();
+
 /**
  * @return string
  */
