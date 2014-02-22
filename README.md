@@ -59,12 +59,16 @@ Assume your project deals with a couple of different databases, with credentials
 ```
 
 ###Configuration options
-Currently, the following configuration elements are supported:
+
+######Mandatory
+If one of these fields is empty or missing, an `RuntimException` will be thrown.
 
 - **host:** The host name
 - **database:** The name of the database
 - **user** or **username:** the database user
 - **pass** or **password:** the database password
+
+######Optional
 - **charset:** the charset to use, defaults to `utf8`
 - **type:** the database type, defaults to `mysql`
 - **port:** the database port, defaults to `3306`
@@ -193,9 +197,8 @@ Currently, the test suite covers:
 
 - Instantiation of `DatabaseServiceLocator` with both valid and invalid arguments.
 - Instantiation of `DatabaseFactory` with with both valid and invalid arguments.
-- Instantiation of `DatabaseConfig` with with both valid and invalid arguments.
+- Instantiation of `DatabaseConfig` with with both valid, invalid and incomplete arguments.
 - more detailled test to come (I am a bloody but hooked beginner with PHPUnit/TravisCI)
 
-As of 20.2., I dont get it how to manage that 'code coverage' thingy. Any useful hint regarding this orut what and 
-how to test next will be appreciated.
+Any help with testing or useful hint regarding what and how to test next will be appreciated!
 
