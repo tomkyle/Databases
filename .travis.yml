@@ -13,5 +13,4 @@ script:
 
 
 after_script:
-- cd ..
 - php vendor/bin/coveralls -v
