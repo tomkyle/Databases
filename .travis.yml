@@ -5,12 +5,11 @@ php:
 
 before_script:
   - composer install
-  - composer require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
-
 
 script:
   - cd tests
 
 
 after_script:
+- cd ..
 - php vendor/bin/coveralls -v

@@ -18,6 +18,10 @@
         "pimple/pimple": "dev-master"
     },
 
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+
     "suggest": {
         "aura/sql": "Aura.SQL – Provides adapters for SQL database access around PDO"
     },
