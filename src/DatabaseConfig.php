@@ -151,10 +151,12 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
      */
     public function valid()
     {
-        return ($this->getHost()
+        $f = ( $this->getHost()
            and $this->getDatabase()
            and $this->getUser()
            and $this->getPassword());
+        var_dump($f);
+        return $f;
     }
 
 }

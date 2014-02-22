@@ -44,6 +44,7 @@ Icon
 vendor
 node_modules
 tests/build
+build
 phpunit.xml
 .htaccess
 config.json

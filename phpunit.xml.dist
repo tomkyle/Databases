@@ -3,17 +3,17 @@
 <phpunit colors="true"
          stopOnFailure="true"
          syntaxCheck="true"
-         bootstrap="bootstrap.php">
+         bootstrap="tests/bootstrap.php">
 
     <testsuites>
         <testsuite name="Databases Test Suite">
-            <directory>./src</directory>
+            <directory>tests/src</directory>
         </testsuite>
     </testsuites>
 
     <filter>
       <whitelist processUncoveredFilesFromWhitelist="true">
-        <directory>../src</directory>
+        <directory>src</directory>
       </whitelist>
     </filter>
 
