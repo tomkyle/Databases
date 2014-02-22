@@ -43,5 +43,6 @@ Icon
 ######################
 vendor
 node_modules
+tests/build
 .htaccess
 config.json
