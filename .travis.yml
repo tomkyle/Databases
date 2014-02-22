@@ -8,7 +8,7 @@ before_script:
 
 script:
   - cd tests
-
+  - mkdir -p build/logs
 
 after_script:
 - cd ..
