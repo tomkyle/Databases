@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true"
+         stopOnFailure="true"
+         syntaxCheck="true"
+         bootstrap="bootstrap.php">
+
+    <testsuites>
+        <testsuite name="Databases Test Suite">
+            <directory>./src</directory>
+        </testsuite>
+    </testsuites>
+
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="testdox-html"    target="build/logs/testdox.html"/>
+        <log type="coverage-text"   target="php://stdout" showUncoveredFiles="false" />
+    </logging>
+
+</phpunit>
