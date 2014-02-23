@@ -8,6 +8,24 @@ use \tomkyle\Databases\DatabaseConfigInterface;
 class DatabaseProviderTest extends \PHPUnit_Framework_TestCase
 {
 
+/*    public function testMemoryDatabase()
+    {
+        $describe = array(
+          'host'     => "localhost",
+          'database' => "Foo",
+          'user'     => "root",
+          'pass'     => "kiranu49"
+        );
+        $dp = new DatabaseProvider( new DatabaseConfig($describe) );
+
+        $this->assertInstanceOf('\tomkyle\Databases\DatabaseProvider', $dp);
+        $this->assertInstanceOf('\mysqli', $dp->getMysqli());
+        $this->assertInstanceOf('\PDO',    $dp->getPdo());
+        $this->assertInstanceOf('\Aura\Sql\Connection\Mysql', $dp->getAuraSql());
+    }
+*/
+
+
     /**
      * Provides valid arguments to DatabaseProvider ctor.
      *
