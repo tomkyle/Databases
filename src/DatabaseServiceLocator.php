@@ -51,7 +51,7 @@ class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInt
 
         foreach($databases as $database => $raw_config):
 
-            $this[ $database ] = function () use ($raw_config) {
+            $this[ $database ] = function () use ($raw_config, $factory) {
                 return $factory->newInstance( new DatabaseConfig( $raw_config ) );
             };
 
