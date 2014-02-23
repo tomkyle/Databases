@@ -58,15 +58,15 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 /**
  * @param DatabaseConfigInterface $config  Database description instance
  * @param array                   $options Unused yet, defaults to blank array.
- * @uses  \Pimple::__constrcut()
+ * @uses  \Pimple::__construct()
  * @uses  defineServices()
  */
-    public function __construct(DatabaseConfigInterface $config, $options = [])
+    public function __construct(DatabaseConfigInterface $config, $options = array())
     {
-        parent::__construct( [
+        parent::__construct( array(
             'config'  => $config,
             'options' => $options
-        ]);
+        );
 
         $this->defineServices();
     }
@@ -99,7 +99,7 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
 
         $this['aura.sql'] = function () {
             $config = $this['config'];
-            $aura = $this['aura.connectionfactory']->newInstance( $config->getType() );
+            $aura   = $this['aura.connectionfactory']->newInstance( $config->getType() );
             $aura->setPdo( $this['pdo'] );
 
             return $aura;
