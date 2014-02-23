@@ -155,7 +155,6 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
            and $this->getDatabase()
            and $this->getUser()
            and $this->getPassword());
-        var_dump($f);
         return $f;
     }
 
