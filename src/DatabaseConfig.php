@@ -154,7 +154,7 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
         $f = ( $this->getHost()
            and $this->getDatabase()
            and $this->getUser()
-           and $this->getPassword());
+           and !is_null($this->getPassword()));
         return $f;
     }
 
