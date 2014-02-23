@@ -85,34 +85,18 @@ Optional fields, with default values according to MySQL:
 - **port:** the database port, defaults to `3306`
 
 ###Usage
-1. Describe your database connection in Array or StdClass
-2. Pass database description to new `DatabaseConfig` object
-3. Pass `DatabaseConfig` to new `DatabaseFactory`
-4. Let factory create generic connection 
+1. Pass database description from aboce to new `DatabaseConfig` object
+2. Pass `DatabaseConfig` to new `DatabaseFactory`
+3. Let factory create generic connection 
 
 ```php
-// 1a. Describe your database as array:
-$describe = array(
-  'host'     => "localhost",
-  'database' => "database1",
-  'user'     => "root",
-  'pass'     => "secret",
-  'charset'  => "utf8"
-);
-
-// 1b. Describe your database as StdClass:
-$describe = json_decode('{
-  "host":     "localhost"
-  // ...truncated...
-}');
-
-// 2. Setup DatabaseConfig instance:
+// 1. Setup DatabaseConfig instance:
 $config = new DatabaseConfig( $describe );
 
-// 3. Create DatabaseFactory instance:
+// 2. Create DatabaseFactory instance:
 $factory = new DatabaseFactory( $config );
 
-// 4. Let factory create Aura.SQL connection:
+// 3. Let factory create Aura.SQL connection:
 $aura = $factory->getAuraSql();
 ```
 

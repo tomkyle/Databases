@@ -66,7 +66,7 @@ class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
         parent::__construct( array(
             'config'  => $config,
             'options' => $options
-        );
+        ));
 
         $this->defineServices();
     }
