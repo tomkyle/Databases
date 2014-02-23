@@ -24,38 +24,23 @@
  */
 namespace tomkyle\Databases;
 
-use \Pimple;
 
 /**
- * DatabaseServiceLocator - Main class
+ * DatabaseFactoryFactory
  *
  * @author  Carsten Witt <tomkyle@posteo.de>
  */
-class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInterface
+class DatabaseFactoryFactory
 {
 
-/**
- * Creates database factories in 'Pimple service' manner.
- *
- * @param   array|\StdClass Collection of Database details, as associative array
- * @throws  InvalidArgumentException
- */
-    public function __construct($databases, DatabaseFactoryFactory $factory_factory = null)
+    /**
+     * Returns a new DatabaseFactory instance.
+     *
+     * @param  DatabaseConfigInterface $config Instance of DatabaseConfigInterface
+     * @return DatabaseFactory
+     */
+    public function newInstance( DatabaseConfigInterface $config )
     {
-        if (!is_array( $databases )
-        and !$databases instanceOf \StdClass) {
-            throw new \InvalidArgumentException("Associative Array or StdClass expected.");
-        }
-
-        $factory = $factory_factory ?: new DatabaseFactoryFactory;
-
-        foreach($databases as $database => $raw_config):
-
-            $this[ $database ] = function () use ($raw_config) {
-                return $factory->newInstance( new DatabaseConfig( $raw_config ) );
-            };
-
-        endforeach;
+        return new DatabaseFactory( $config );
     }
-
 }
