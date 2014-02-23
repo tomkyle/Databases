@@ -5,11 +5,15 @@ use \tomkyle\Databases\DatabaseProvider;
 use \tomkyle\Databases\DatabaseConfig;
 use \tomkyle\Databases\DatabaseConfigInterface;
 
-class DatabaseProviderTest extends \PHPUnit_Framework_TestCase
+class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 {
 
-    public function testTravisDatabase()
+    public function testConnectionFactoryMethodsOnTravisMySql()
     {
+        if (!$this->isTravisCi()) {
+            #return true;
+        }
+
         $describe = array(
           'host'     => "127.0.0.1",
           'database' => "tomkyle_test",
@@ -17,10 +21,11 @@ class DatabaseProviderTest extends \PHPUnit_Framework_TestCase
           'pass'     => "",
           'type'     => "mysql"
         );
+
         $dp = new DatabaseProvider( new DatabaseConfig($describe) );
 
-        $this->assertInstanceOf('\tomkyle\Databases\DatabaseProvider',
-                                $dp);
+        $this->assertInstanceOf('\tomkyle\Databases\DatabaseProvider', $dp);
+
         $this->assertInstanceOf('\mysqli',                    $dp->getMysqli());
         $this->assertInstanceOf('\PDO',                       $dp->getPdo());
         $this->assertInstanceOf('\Aura\Sql\Connection\Mysql', $dp->getAuraSql());
@@ -32,7 +37,7 @@ class DatabaseProviderTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider provideValidCtorArguments
      */
-    public function testValidFactoryOnCtor($valid)
+    public function testValidConfigArgumentsOnCtor($valid)
     {
         $dp = new DatabaseProvider( $valid );
         $this->assertInstanceOf('\tomkyle\Databases\DatabaseProvider', $dp);
@@ -97,27 +102,6 @@ class DatabaseProviderTest extends \PHPUnit_Framework_TestCase
                 "charset":  "utf8"
             }');
     }
-
-
-/**
- * Call protected/private method of a class.
- *
- * @param object &$object    Instantiated object that we will run method on.
- * @param string $methodName Method name to call
- * @param array  $parameters Array of parameters to pass into method.
- *
- * @return mixed Method return.
- *
- * @see  https://jtreminio.com/2013/03/unit-testing-tutorial-part-3-testing-protected-private-methods-coverage-reports-and-crap/
- */
-public function invokeMethod(&$object, $methodName, array $parameters = array())
-{
-    $reflection = new \ReflectionClass(get_class($object));
-    $method = $reflection->getMethod($methodName);
-    $method->setAccessible(true);
-
-    return $method->invokeArgs($object, $parameters);
-}
 
 }
 
