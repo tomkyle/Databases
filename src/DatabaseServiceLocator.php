@@ -40,14 +40,14 @@ class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInt
  * @param   array|\StdClass Collection of Database details, as associative array
  * @throws  InvalidArgumentException
  */
-    public function __construct($databases, DatabaseFactoryFactory $factory_factory = null)
+    public function __construct($databases, DatabaseProviderFactory $factory_factory = null)
     {
         if (!is_array( $databases )
         and !$databases instanceOf \StdClass) {
             throw new \InvalidArgumentException("Associative Array or StdClass expected.");
         }
 
-        $factory = $factory_factory ?: new DatabaseFactoryFactory;
+        $factory = $factory_factory ?: new DatabaseProviderFactory;
 
         foreach($databases as $database => $raw_config):
 

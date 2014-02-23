@@ -52,7 +52,7 @@ use \Aura\Sql\ConnectionFactory as AuraConnectionFactory;
  *    $mysqli = $factory->getMysqli();
  *    ?>
  */
-class DatabaseFactory extends Pimple implements DatabaseFactoryInterface
+class DatabaseProvider extends Pimple implements DatabaseProviderInterface
 {
 
 /**
