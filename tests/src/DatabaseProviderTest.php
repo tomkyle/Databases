@@ -54,13 +54,13 @@ class DatabaseProviderTest extends \PHPUnit_Framework_TestCase
      */
     protected function createArrayConfigArgument()
     {
-        return [
-                'host' =>     "localhost",
-                'database' => "database1",
-                'user' =>     "root",
-                'pass' =>     "secret",
-                'charset' =>  "utf8"
-            ];
+        return array(
+            'host' =>     "localhost",
+            'database' => "database1",
+            'user' =>     "root",
+            'pass' =>     "secret",
+            'charset' =>  "utf8"
+        );
     }
 
     /**
