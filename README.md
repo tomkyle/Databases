@@ -50,7 +50,7 @@ This library is installable and autoloadable via Composer. During installation, 
 
 ##Getting started: Single Database
 
-```json
+```php
 // 1a. Describe your database as array:
 $describe = array(
   'host'     => "localhost",
