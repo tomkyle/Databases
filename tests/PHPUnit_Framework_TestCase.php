@@ -19,6 +19,24 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
             and $_SERVER['TRAVIS'] == "true");
     }
 
+    /**
+     * Returns valid database data for MySQL on Travis CI.
+     *
+     * See `.travis.yml` config file and documentation on Travis CI
+     *
+     * @return boolean
+     * @see  http://docs.travis-ci.com/user/database-setup/
+     */
+    public function getTravisMysqlDatabaseDescription()
+    {
+        return array(
+          'host'     => "127.0.0.1",
+          'database' => "tomkyle_test",
+          'user'     => "travis",
+          'pass'     => "",
+          'type'     => "mysql"
+        );
+    }
 
 
 

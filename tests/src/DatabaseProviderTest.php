@@ -8,19 +8,19 @@ use \tomkyle\Databases\DatabaseConfigInterface;
 class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 {
 
+    /**
+     * Test DatabaseProvider against a MySQL-Database on Travis CI.
+     *
+     * @uses  \tomkyle\PHPUnit_Framework_TestCase::isTravisCi()
+     * @uses  \tomkyle\PHPUnit_Framework_TestCase::getTravisMysqlDatabaseDescription()
+     */
     public function testConnectionFactoryMethodsOnTravisMySql()
     {
         if (!$this->isTravisCi()) {
-            #return true;
+            return true;
         }
 
-        $describe = array(
-          'host'     => "127.0.0.1",
-          'database' => "tomkyle_test",
-          'user'     => "travis",
-          'pass'     => "",
-          'type'     => "mysql"
-        );
+        $describe = $this->getTravisMysqlDatabaseDescription();
 
         $dp = new DatabaseProvider( new DatabaseConfig($describe) );
 
@@ -30,6 +30,7 @@ class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\PDO',                       $dp->getPdo());
         $this->assertInstanceOf('\Aura\Sql\Connection\Mysql', $dp->getAuraSql());
     }
+
 
 
     /**
@@ -42,6 +43,8 @@ class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
         $dp = new DatabaseProvider( $valid );
         $this->assertInstanceOf('\tomkyle\Databases\DatabaseProvider', $dp);
     }
+
+
 
     /**
      * @dataProvider provideValidCtorArguments
@@ -80,7 +83,7 @@ class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
     {
         return array(
             'host' =>     "localhost",
-            'database' => "database1",
+            'database' => "not_existing",
             'user' =>     "root",
             'pass' =>     "secret",
             'charset' =>  "utf8"
