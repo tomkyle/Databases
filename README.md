@@ -6,7 +6,7 @@ This Databases Connection Factory & Service Locator creates generic connections 
 
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=master)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=master)](https://coveralls.io/r/tomkyle/Databases?branch=master)
 
 ##In a Nutshell
 ###Single Database
