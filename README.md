@@ -100,7 +100,7 @@ Optional fields, with default values according to MySQL:
 
 ###Retrieving connections
 
-Each `DatabaseFactory` instance works as a Connection factory that provides and instantiates different kinds of Singleton database connections. You may grab your connection either by calling a getter Method or access it as array key (the Pimple way):
+Each `DatabaseFactory` instance provides and instantiates different kinds of Singleton-like database connections. You may grab your connection either by calling a Getter method or access it as array key (the Pimple way):
 
 ####PDO Connections
 
@@ -191,15 +191,10 @@ $config = json_decode( file_get_contents( 'config.json' ));
 $databases = new DatabaseServiceLocator( $config );
 
 // 1. Get DatabaseFactory instance, Pimple-style:
-$foo_factory = $databases['first_db'];
+$first_factory = $databases['first_db'];
 
 // 2. Let factory create Aura.SQL connection:
-$foo_aura = $foo_factory->getAuraSql();
-
-// Shortcut: Create connection in one step
-$bar_pdo    = $databases['second_db']->getPdo();
-$bar_mysqli = $databases['second_db']->getMysqli();
-$bar_aura   = $databases['second_db']->getAurSql();
+$first_aura = $first_factory->getAuraSql();
 ```
 
 ###Retrieving connections
@@ -215,9 +210,14 @@ Since both Service Locator and Factories are Pimple extensions, you can get your
 
 ```php
 $databases = new DatabaseServiceLocator( $config );
-$foo_pdo    = $databases['first_db']['pdo'];
-$foo_mysqli = $databases['first_db']['mysqli'];
-$foo_pdo    = $databases['first_db']['aura.sql'];
+
+$first_pdo    = $databases['first_db']->getPdo();
+$first_mysqli = $databases['first_db']->getMysqli();
+$first_aura   = $databases['first_db']->getAuraSql();
+
+$second_pdo    = $databases['second_db']['pdo'];
+$second_mysqli = $databases['second_db']['mysqli'];
+$second_aura   = $databases['second_db']['aura.sql'];
 ```
 
 
