@@ -5,8 +5,8 @@ This Databases Connection Factory & Service Locator creates generic connections 
 
 
 
-[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=develop)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=develop)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
+[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=master)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
 
 ##In a Nutshell
 ###Single Database
@@ -251,17 +251,3 @@ Currently, DatabaseServiceLocator supports [Aura.SQL v1.3](http://github.com/aur
 I will try to add v2 support as soon as v2 has become stable or standard, and I got used to it. Just in case you already are, you are invited to fork your own DatabaseServiceLocator :-)
 
 
-
-##Automated tests
-
-[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=develop)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=develop)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
-
-Currently, the test suite covers:
-
-- Instantiation of `DatabaseServiceLocator` with both valid and invalid arguments.
-- Instantiation of `DatabaseProvider` with with both valid and invalid arguments.
-- Instantiation of `DatabaseConfig` with with both valid, invalid and incomplete arguments.
-- more detailled test to come (I am a bloody but hooked beginner with PHPUnit/TravisCI)
-
-Any help with testing or useful hint regarding what and how to test next will be appreciated!
