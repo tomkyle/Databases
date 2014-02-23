@@ -81,7 +81,6 @@ $factory = new DatabaseFactory( $config );
 
 // 4. Grab Aura.SQL connection:
 $aura = $factory->getAuraSql();
-
 ```
 
 ###Configuration options
@@ -99,13 +98,67 @@ Optional fields, with default values according to MySQL:
 - **port:** the database port, defaults to `3306`
 
 
+###Retrieving connections
+
+Each `DatabaseFactory` instance works as a Connection factory that provides and instantiates different kinds of Singleton database connections. You may grab your connection either by calling a getter Method or access it as array key (the Pimple way):
+
+####PDO Connections
+
+```php
+$pdo = $factory->getPdo();
+// or 
+$pdo = $factory['pdo'];
+
+echo get_class( $pdo );
+// "PDO"
+```
+
+####Aura.SQL Connections
+
+```php
+aura = $factory->getAuraSql();
+// or 
+$aura = $factory['aura.sql'];
+
+echo get_class( $aura );
+// "Aura\Sql\Connection\Mysql", for example
+
+// Common configuration afterwards
+$aura->setAttribute( \PDO::ATTR_ERRMODE,             \PDO::ERRMODE_EXCEPTION );
+$aura->setAttribute( \PDO::ATTR_DEFAULT_FETCH_MODE,  \PDO::FETCH_OBJ);
+```
+
+
+
+####mysqli Connections
+
+```php
+$mysqli = $factory->getMysqli();
+// or 
+$mysqli = $factory['mysqli'];
+
+echo get_class( $mysqli );
+// "mysqli"
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##Multiple Databases: Using Service Locator
 
 Assume your project deals with a couple of different databases, with credentials and stuff in a JSON config file. First, describe each connection with config options (see [full list below](#configuration-options)), like this:
 
-###Sample config file
+#####Sample config file
+
 ```json
 {
   "first_db" : {
@@ -125,11 +178,13 @@ Assume your project deals with a couple of different databases, with credentials
 }
 ```
 
+###Usage
+
 1. Parse config contents into a `StdClass` object
 2. Create a new instance of `DatabaseServiceLocator`,  
-   passing in your database descriptions object from above
+   passing in your database descriptions
 3. Get your Factory instance for your database
-4. Let factory create generic connection 
+4. Let factory create generic connection:
 
 ```php
 $config = json_decode( file_get_contents( 'config.json' ));
@@ -144,19 +199,11 @@ $foo_aura = $foo_factory->getAuraSql();
 // Shortcut: Create connection in one step
 $bar_pdo    = $databases['second_db']->getPdo();
 $bar_mysqli = $databases['second_db']->getMysqli();
+$bar_aura   = $databases['second_db']->getAurSql();
 ```
-
-####Shortcut/Oneliner
-Since both ServiceLocator and Factories are Pimple extensions, you can get your connection in one call as well:
-
-```php
-$databases = new DatabaseServiceLocator( $config );
-$foo_pdo = $databases['first_db']['pdo'];
-```
-
 
 ###Retrieving connections
-Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton-like instance of `DatabaseFactory`:
+Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton-like instance of `DatabaseFactory`. 
 
 ```php
 $foo_factory = $databases['foo_db'];  
@@ -164,48 +211,22 @@ echo get_class( $foo_factory );
 // "DatabaseFactory"
 ```
 
-Each `DatabaseFactory` instance works as a Connection factory that provides and instantiates different kinds of Singleton database connections. You may grab your connection either by calling a getter Method or access it as array key (the Pimple way):
-
-####PDO Connections
+Since both Service Locator and Factories are Pimple extensions, you can get your connection in one call as well:
 
 ```php
-$pdo = $foo_factory['pdo'];
-// or 
-$pdo = $foo_factory->getPdo();
-echo get_class( $pdo );
-// "PDO"
-```
-
-####Aura.SQL Connections
-
-```php
-$aura = $foo_factory['aura.sql'];
-// or 
-$aura = $foo_factory->getAuraSql();
-echo get_class( $aura );
-// "Aura\Sql\Connection\Mysql", for example
-
-// Common configuration afterwards
-$aura->setAttribute( \PDO::ATTR_ERRMODE,             \PDO::ERRMODE_EXCEPTION );
-$aura->setAttribute( \PDO::ATTR_DEFAULT_FETCH_MODE,  \PDO::FETCH_OBJ);
+$databases = new DatabaseServiceLocator( $config );
+$foo_pdo    = $databases['first_db']['pdo'];
+$foo_mysqli = $databases['first_db']['mysqli'];
+$foo_pdo    = $databases['first_db']['aura.sql'];
 ```
 
 
 
-####mysqli Connections
 
-```php
-$mysqli = $foo_factory['mysqli'];
-// or 
-$mysqli = $foo_factory->getMysqli();
-echo get_class( $mysqli );
-// "mysqli"
-```
-
-###Best practice
+##Best practice
 If a class needs a special database connection, let's say PDO, here's how: 
 
-1. Get your connection factory from DatabaseServiceLocator
+1. Get your connection factory
 2. Let it create a PDO connection for you 
 3. Inject the resulting PDO. 
 
@@ -215,7 +236,7 @@ If a class needs a special database connection, let's say PDO, here's how:
 5. Let it create a Aura.SQL connection for you
 6. Inject the resulting Aura.SQL Mysql Connection. 
 
-This way, when things go wrong, they do so outside your business classes (Inversion of Control principle).
+This way, when things go wrong, they do so outside your business classes (Inversion of Control).
 
 Paul M. Jones recently covers this topic in his recently published article [“What Application Layer Does A DI Container Belong In?”](http://paul-m-jones.com/archives/5914).
 
