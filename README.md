@@ -14,6 +14,7 @@ This Databases Factory & Service Locator creates generic connections to common d
 2. Create **ConnectionFactory** with config object (Dependency Injection) 
 3. **Grab your connection** for the database API you like
 
+[Show it already!](#getting-started-single-database)
 
 ###Multiple Databases
 1. **Describe database** connections in two-dimensional array or StdClass
@@ -21,7 +22,7 @@ This Databases Factory & Service Locator creates generic connections to common d
 3. Get **ConnectionFactory** from ServiceLocator
 4. **Grab your connection** for the database API you like
 
-[Show it already!](#usage)
+[Show it already!](#multiple-databases-using-service-locator)
 
 
 ##Requirements
