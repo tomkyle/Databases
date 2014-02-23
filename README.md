@@ -49,6 +49,8 @@ This library is installable and autoloadable via Composer. During installation, 
 
 
 ##Getting started: Single Database
+###The DatabaseConfig class
+Each `DatabaseFactory` needs some info about the database in question, passed as parameter implementing the `DatabaseConfigInterface`. A ready-to-use implementation is the `DatabaseConfig`, which itself is configured either by an associative array or StdClass.
 
 ```php
 // 1a. Describe your database as array:
@@ -62,15 +64,16 @@ $describe = array(
 
 // 1b. Describe your database as StdClass:
 $describe = json_decode('{
-  "host":     "localhost"
-  // ...truncated...
+  "host":     "localhost",
+  "database": "database1"
+  # etc.
 }');
 
 // 2. Setup DatabaseConfig instance:
 $config = new DatabaseConfig( $describe );
 ```
 
-###Configuration options
+#####Configuration options
 If one of these fields is empty or missing, a `RuntimeException` will be thrown:
 
 - **host:** The host name
@@ -85,18 +88,15 @@ Optional fields, with default values according to MySQL:
 - **port:** the database port, defaults to `3306`
 
 ###Usage
-1. Pass database description from aboce to new `DatabaseConfig` object
-2. Pass `DatabaseConfig` to new `DatabaseFactory`
-3. Let factory create generic connection 
+Now that you have your `DatabaseConfig` ready, simply: 
+1. Creete new `DatabaseFactory` with `DatabaseConfig` 
+2. Let factory create generic connection 
 
 ```php
-// 1. Setup DatabaseConfig instance:
-$config = new DatabaseConfig( $describe );
-
-// 2. Create DatabaseFactory instance:
+// 1. Create DatabaseFactory instance:
 $factory = new DatabaseFactory( $config );
 
-// 3. Let factory create Aura.SQL connection:
+// 2. Grab Aura.SQL connection:
 $aura = $factory->getAuraSql();
 ```
 
@@ -157,7 +157,7 @@ $foo_pdo = $databases['first_db']['pdo'];
 
 
 ###Retrieving connections
-Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton instance of `DatabaseFactory`:
+Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton-like instance of `DatabaseFactory`:
 
 ```php
 $foo_factory = $databases['foo_db'];  
