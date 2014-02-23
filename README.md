@@ -6,7 +6,7 @@ This Databases Connection Factory & Service Locator creates generic connections 
 
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=develop)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png)](https://coveralls.io/r/tomkyle/Databases)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=develop)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
 
 ##In a Nutshell
 ###Single Database
@@ -255,7 +255,7 @@ I will try to add v2 support as soon as v2 has become stable or standard, and I 
 ##Automated tests
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=develop)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png)](https://coveralls.io/r/tomkyle/Databases)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=develop)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
 
 Currently, the test suite covers:
 
