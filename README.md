@@ -48,32 +48,29 @@ This library is installable and autoloadable via Composer. During installation, 
 
 
 
-##Configuration
+##Getting started: Single Database
 
-Assume your project deals with a couple of different databases, with credentials and stuff in a JSON config file. First, describe each connection with config options (see [full list below](#configuration-options)), like this:
-
-###Sample config file
 ```json
-{
-  "first_db" : {
-    "host":     "db_host",
-    "database": "db_name",
-    "user":     "db_user",
-    "pass":     "db_pass"
-  },
-  "second_db" : {
-    "host":     "other_host",
-    "database": "other_db",
-    "user":     "other_user",
-    "pass":     "other_pass",
-    "type":     "not_mysql",
-    "charset":  "utf8"
-  }
-}
+// 1a. Describe your database as array:
+$describe = array(
+  'host'     => "localhost",
+  'database' => "database1",
+  'user'     => "root",
+  'pass'     => "secret",
+  'charset'  => "utf8"
+);
+
+// 1b. Describe your database as StdClass:
+$describe = json_decode('{
+  "host":     "localhost"
+  // ...truncated...
+}');
+
+// 2. Setup DatabaseConfig instance:
+$config = new DatabaseConfig( $describe );
 ```
 
 ###Configuration options
-
 If one of these fields is empty or missing, a `RuntimeException` will be thrown:
 
 - **host:** The host name
@@ -87,13 +84,10 @@ Optional fields, with default values according to MySQL:
 - **type:** the database type, defaults to `mysql`
 - **port:** the database port, defaults to `3306`
 
-
-##Usage
-
-###Single Database
-1. Describe your database connection in array or StdClass
-2. Pass database description to new DatabaseConfig object
-3. Pass DabaseConfig to new DatabaseFactory
+###Usage
+1. Describe your database connection in Array or StdClass
+2. Pass database description to new `DatabaseConfig` object
+3. Pass `DatabaseConfig` to new `DatabaseFactory`
 4. Let factory create generic connection 
 
 ```php
@@ -124,7 +118,29 @@ $aura = $factory->getAuraSql();
 
 
 
-###Multiple Databases
+##Multiple Databases: Using Service Locator
+
+Assume your project deals with a couple of different databases, with credentials and stuff in a JSON config file. First, describe each connection with config options (see [full list below](#configuration-options)), like this:
+
+###Sample config file
+```json
+{
+  "first_db" : {
+    "host":     "db_host",
+    "database": "db_name",
+    "user":     "db_user",
+    "pass":     "db_pass"
+  },
+  "second_db" : {
+    "host":     "other_host",
+    "database": "other_db",
+    "user":     "other_user",
+    "pass":     "other_pass",
+    "type":     "not_mysql",
+    "charset":  "utf8"
+  }
+}
+```
 
 1. Parse config contents into a `StdClass` object
 2. Create a new instance of `DatabaseServiceLocator`,  
