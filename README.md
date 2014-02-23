@@ -49,9 +49,13 @@ This library is installable and autoloadable via Composer. During installation, 
 
 
 ##Getting started: Single Database
-###The DatabaseConfig class
+
+###Overview
 Each `DatabaseFactory` needs some info about the database in question, passed as parameter implementing the `DatabaseConfigInterface`. A ready-to-use implementation is the `DatabaseConfig`, which itself is configured either by an associative array or StdClass.
 
+Now that you have your `DatabaseConfig` ready, simply pass to new `DatabaseFactory` and grab the connection you like.
+
+###Example
 ```php
 // 1a. Describe your database as array:
 $describe = array(
@@ -71,10 +75,17 @@ $describe = json_decode('{
 
 // 2. Setup DatabaseConfig instance:
 $config = new DatabaseConfig( $describe );
+
+// 3. Create DatabaseFactory instance:
+$factory = new DatabaseFactory( $config );
+
+// 4. Grab Aura.SQL connection:
+$aura = $factory->getAuraSql();
+
 ```
 
-#####Configuration options
-If one of these fields is empty or missing, a `RuntimeException` will be thrown:
+###Configuration options
+If one of these fields is empty or missing, `DatabaseConfig` will throw a `RuntimeException`:
 
 - **host:** The host name
 - **database:** The name of the database
@@ -87,18 +98,6 @@ Optional fields, with default values according to MySQL:
 - **type:** the database type, defaults to `mysql`
 - **port:** the database port, defaults to `3306`
 
-###Usage
-Now that you have your `DatabaseConfig` ready, simply: 
-1. Creete new `DatabaseFactory` with `DatabaseConfig` 
-2. Let factory create generic connection 
-
-```php
-// 1. Create DatabaseFactory instance:
-$factory = new DatabaseFactory( $config );
-
-// 2. Grab Aura.SQL connection:
-$aura = $factory->getAuraSql();
-```
 
 
 
