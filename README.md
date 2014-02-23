@@ -1,17 +1,17 @@
 #Databases Factory & Service Locator  
 
-This Databases Factory & Service Locator creates generic connections to common database APIs, provided by easy-to-use connection factories. When working with multiple databases, a Service Locator helps you creating those factories. It supports [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master).
+This Databases Connection Factory & Service Locator creates generic connections to common database APIs, provided by easy-to-use connection factories. When working with multiple databases, a Service Locator helps you creating those factories. It supports [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master).
 
 
 
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=develop)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png)](https://coveralls.io/r/tomkyle/Databases)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=develop)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
 
 ##In a Nutshell
 ###Single Database
 1. Setup **DatabaseConfig** with associative array or StdClass
-2. Create **ConnectionFactory** with config object (Dependency Injection) 
+2. Create **DatabaseProvider** with config object (Dependency Injection) 
 3. **Grab your connection** for the database API you like
 
 [Show it already!](#getting-started-single-database)
@@ -19,7 +19,7 @@ This Databases Factory & Service Locator creates generic connections to common d
 ###Multiple Databases
 1. **Describe database** connections in two-dimensional array or StdClass
 2. Setup **DatabaseServiceLocator** with config object 
-3. Get **ConnectionFactory** from ServiceLocator
+3. Get **DatabaseProvider** from ServiceLocator
 4. **Grab your connection** for the database API you like
 
 [Show it already!](#multiple-databases-using-service-locator)
@@ -45,9 +45,9 @@ This library has no dependencies except from Fabien Potencier's [Pimple](https:/
 ##Getting started: Single Database
 
 ###Overview
-Each `DatabaseFactory` needs some info about the database in question, passed as parameter implementing the `DatabaseConfigInterface`. A ready-to-use implementation is the `DatabaseConfig`, which itself is configured either by an associative array or StdClass.
+Each `DatabaseProvider` needs some info about the database in question, passed as parameter implementing the `DatabaseConfigInterface`. A ready-to-use implementation is the `DatabaseConfig`, which itself is configured either by an associative array or StdClass.
 
-Now that you have your `DatabaseConfig` ready, simply pass to new `DatabaseFactory` and grab the connection you like.
+Now that you have your `DatabaseConfig` ready, simply pass to new `DatabaseProvider` and grab the connection you like.
 
 ###Example
 ```php
@@ -70,8 +70,8 @@ $describe = json_decode('{
 // 2. Setup DatabaseConfig instance:
 $config = new DatabaseConfig( $describe );
 
-// 3. Create DatabaseFactory instance:
-$factory = new DatabaseFactory( $config );
+// 3. Create DatabaseProvider instance:
+$factory = new DatabaseProvider( $config );
 
 // 4. Grab Aura.SQL connection:
 $aura = $factory->getAuraSql();
@@ -94,7 +94,7 @@ Optional fields, with default values according to MySQL:
 
 ###Retrieving connections
 
-Each `DatabaseFactory` instance provides and instantiates different kinds of Singleton-like database connections. You may grab your connection either by calling a Getter method or access it as array key (the Pimple way):
+Each `DatabaseProvider` instance provides and instantiates different kinds of Singleton-like database connections. You may grab your connection either by calling a Getter method or access it as array key (the Pimple way):
 
 ####PDO Connections
 
@@ -177,14 +177,14 @@ Assume your project deals with a couple of different databases, with credentials
 1. Parse config contents into a `StdClass` object
 2. Create a new instance of `DatabaseServiceLocator`,  
    passing in your database descriptions
-3. Get your Factory instance for your database
+3. Get your `DatabaseProvider` instance for your database
 4. Let factory create generic connection:
 
 ```php
 $config = json_decode( file_get_contents( 'config.json' ));
 $databases = new DatabaseServiceLocator( $config );
 
-// 1. Get DatabaseFactory instance, Pimple-style:
+// 1. Get DatabaseProvider instance, Pimple-style:
 $first_factory = $databases['first_db'];
 
 // 2. Let factory create Aura.SQL connection:
@@ -192,12 +192,12 @@ $first_aura = $first_factory->getAuraSql();
 ```
 
 ###Retrieving connections
-Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton-like instance of `DatabaseFactory`. 
+Each database passed in the `DatabaseServiceLocator` will be available like an array member. The database returned will be a Singleton-like instance of `DatabaseProvider`. 
 
 ```php
 $foo_factory = $databases['foo_db'];  
 echo get_class( $foo_factory );
-// "DatabaseFactory"
+// "DatabaseProvider"
 ```
 
 Since both Service Locator and Factories are Pimple extensions, you can get your connection in one call as well:
@@ -220,13 +220,13 @@ $second_aura   = $databases['second_db']['aura.sql'];
 ##Best practice
 If a class needs a special database connection, let's say PDO, here's how: 
 
-1. Get your connection factory
+1. Get your connection provider
 2. Let it create a PDO connection for you 
 3. Inject the resulting PDO. 
 
 …and the next class, relying on Aura.SQL dependencies:
 
-4. Take the very same connection factory instance (remember: Singleton!)
+4. Take the very same connection provider instance (remember: Singleton!)
 5. Let it create a Aura.SQL connection for you
 6. Inject the resulting Aura.SQL Mysql Connection. 
 
@@ -254,15 +254,14 @@ I will try to add v2 support as soon as v2 has become stable or standard, and I 
 
 ##Automated tests
 
-[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
-[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png)](https://coveralls.io/r/tomkyle/Databases)
+[![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=develop)](https://travis-ci.org/tomkyle/Databases)
+[![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=develop)](https://coveralls.io/r/tomkyle/Databases?branch=develop)
 
 Currently, the test suite covers:
 
 - Instantiation of `DatabaseServiceLocator` with both valid and invalid arguments.
-- Instantiation of `DatabaseFactory` with with both valid and invalid arguments.
+- Instantiation of `DatabaseProvider` with with both valid and invalid arguments.
 - Instantiation of `DatabaseConfig` with with both valid, invalid and incomplete arguments.
 - more detailled test to come (I am a bloody but hooked beginner with PHPUnit/TravisCI)
 
 Any help with testing or useful hint regarding what and how to test next will be appreciated!
-

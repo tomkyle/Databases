@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of tomkyle/Databases.
+ * This file is part of tomkyle/DatabaseServiceLocator.
  *
  * Copyright (c) 2014 Carsten Witt
  *
@@ -24,32 +24,23 @@
  */
 namespace tomkyle\Databases;
 
+
 /**
- * DatabaseFactoryInterface
+ * DatabaseProviderFactory
  *
- * Prescribes methods for providing generic database connections.
+ * @author  Carsten Witt <tomkyle@posteo.de>
  */
-interface DatabaseFactoryInterface
+class DatabaseProviderFactory
 {
 
-/**
- * Returns a PDO instance.
- *
- * @return \PDO
- */
-    public function getPdo();
-
-/**
- * Returns a Aura.SQL Database Connection
- *
- * @return \Aura\Sql\Connection\AbstractConnection
- */
-    public function getAuraSql();
-
-/**
- * Returns a Mysqli instance.
- *
- * @return \mysqli
- */
-    public function getMysqli();
+    /**
+     * Returns a new DatabaseProvider instance.
+     *
+     * @param  DatabaseConfigInterface $config Instance of DatabaseConfigInterface
+     * @return DatabaseProvider
+     */
+    public function newInstance( DatabaseConfigInterface $config )
+    {
+        return new DatabaseProvider( $config );
+    }
 }

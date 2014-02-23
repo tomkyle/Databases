@@ -3,8 +3,33 @@ namespace tests;
 
 use \tomkyle\Databases\DatabaseServiceLocator;
 
-class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
+class DatabaseServiceLocatorTest extends \tomkyle\PHPUnit_Framework_TestCase
 {
+
+    /**
+     * Test DatabaseServiceLocator against a MySQL-Database on Travis CI.
+     *
+     * @uses  \tomkyle\PHPUnit_Framework_TestCase::isTravisCi()
+     * @uses  \tomkyle\PHPUnit_Framework_TestCase::getTravisMysqlDatabaseDescription()
+     */
+    public function testConnectionFactoriesMethodsOnTravisMySql()
+    {
+        if (!$this->isTravisCi()) {
+            return true;
+        }
+
+        $describe = array(
+            'travis' => $this->getTravisMysqlDatabaseDescription()
+        );
+
+        $service = new DatabaseServiceLocator( $describe );
+
+        $this->assertInstanceOf('\tomkyle\Databases\DatabaseServiceLocator', $service);
+        $this->assertInstanceOf('\mysqli',                    $service['travis']->getMysqli());
+        $this->assertInstanceOf('\PDO',                       $service['travis']->getPdo());
+        $this->assertInstanceOf('\Aura\Sql\Connection\Mysql', $service['travis']->getAuraSql());
+    }
+
     /**
      * Challenges the DatabaseServiceLocator ctor with invalid arguments.
      *
@@ -59,22 +84,22 @@ class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function createTwoDimArrayConfigArgument()
     {
-        return [
-            'db1' => [
-                'host' =>     "localhost",
+        return array(
+            'db1' => array(
+                'host'     => "localhost",
                 'database' => "database1",
-                'user' =>     "root",
-                'pass' =>     "secret",
-                'charset' =>  "utf8"
-            ],
-            'db2' => [
-                'host' =>     "localhost",
+                'user'     => "root",
+                'pass'     => "secret",
+                'charset'  => "utf8"
+            ),
+            'db2' => array(
+                'host'     => "localhost",
                 'database' => "database2",
-                'user' =>     "root",
-                'pass' =>     "password",
-                'charset' =>  "utf8"
-            ]
-        ];
+                'user'     => "root",
+                'pass'     => "password",
+                'charset'  => "utf8"
+            )
+        );
     }
 
     /**

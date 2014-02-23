@@ -1,23 +1,27 @@
 <?php
 namespace tests;
 
-use \tomkyle\Databases\DatabaseFactory;
+use \tomkyle\Databases\DatabaseProvider;
+use \tomkyle\Databases\DatabaseProviderFactory;
 use \tomkyle\Databases\DatabaseConfig;
 
-class DatabaseFactoryTest extends \PHPUnit_Framework_TestCase
+class DatabaseProviderFactoryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Provides valid arguments to DatabaseFactory ctor.
+     * Provides valid arguments to DatabaseProviderFactory factory method.
      *
      * @dataProvider provideValidCtorArguments
      */
-    public function testValidFactoryOnCtor($valid)
+    public function testValidProviderByFactoryMethod($valid)
     {
+        $provider = new DatabaseProviderFactory;
         $this->assertInstanceOf(
-            '\tomkyle\Databases\DatabaseFactory',
-            new DatabaseFactory( $valid ));
+            '\tomkyle\Databases\DatabaseProvider', $provider->newInstance($valid));
     }
+
+
+
 
     /**
      * Returns a set of valid ctor arguments.
@@ -37,13 +41,13 @@ class DatabaseFactoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function createArrayConfigArgument()
     {
-        return [
+        return array(
                 'host' =>     "localhost",
                 'database' => "database1",
                 'user' =>     "root",
                 'pass' =>     "secret",
                 'charset' =>  "utf8"
-            ];
+            );
     }
 
     /**
@@ -63,3 +67,4 @@ class DatabaseFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
 }
+

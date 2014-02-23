@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of tomkyle/DatabaseServiceLocator.
+ * This file is part of tomkyle/Databases.
  *
  * Copyright (c) 2014 Carsten Witt
  *
@@ -24,38 +24,32 @@
  */
 namespace tomkyle\Databases;
 
-use \Pimple;
-
 /**
- * DatabaseServiceLocator - Main class
+ * DatabaseProviderInterface
  *
- * @author  Carsten Witt <tomkyle@posteo.de>
+ * Prescribes methods for providing generic database connections.
  */
-class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInterface
+interface DatabaseProviderInterface
 {
 
 /**
- * Creates database factories in 'Pimple service' manner.
+ * Returns a PDO instance.
  *
- * @param   array|\StdClass Collection of Database details, as associative array
- * @throws  InvalidArgumentException
+ * @return \PDO
  */
-    public function __construct($databases, DatabaseProviderFactory $factory_factory = null)
-    {
-        if (!is_array( $databases )
-        and !$databases instanceOf \StdClass) {
-            throw new \InvalidArgumentException("Associative Array or StdClass expected.");
-        }
+    public function getPdo();
 
-        $factory = $factory_factory ?: new DatabaseProviderFactory;
+/**
+ * Returns a Aura.SQL Database Connection
+ *
+ * @return \Aura\Sql\Connection\AbstractConnection
+ */
+    public function getAuraSql();
 
-        foreach($databases as $database => $raw_config):
-
-            $this[ $database ] = function () use ($raw_config, $factory) {
-                return $factory->newInstance( new DatabaseConfig( $raw_config ) );
-            };
-
-        endforeach;
-    }
-
+/**
+ * Returns a Mysqli instance.
+ *
+ * @return \mysqli
+ */
+    public function getMysqli();
 }
