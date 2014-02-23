@@ -1,13 +1,22 @@
-#Databases Service Locator  
+#Databases Factory & Service Locator  
 
-DatabaseServiceLocator is a service locator for generic connections to common database APIs. As an extension of [Pimple](https://github.com/fabpot/Pimple), it combines the Singleton-behaving factories provided by Pimple with a simplified creation of connections to [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master). 
+This Databases Factory & Service Locator creates generic connections to common database APIs, provided by easy-to-use connection factories. When working with multiple databases, a Service Locator helps you creating those factories. It supports [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master).
+
+
+
 
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
 [![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png)](https://coveralls.io/r/tomkyle/Databases)
 
 ##In a Nutshell
+###Single Database
+1. Setup **DatabaseConfig** with associative array or StdClass
+2. Create **ConnectionFactory** with config object (Dependency Injection) 
+3. **Grab your connection** for the database API you like
 
-1. **Describe database** connections, e.g. in plain config object
+
+###Multiple Databases
+1. **Describe database** connections in two-dimensional array or StdClass
 2. Setup **DatabaseServiceLocator** with config object 
 3. Get **ConnectionFactory** from ServiceLocator
 4. **Grab your connection** for the database API you like
@@ -18,14 +27,19 @@ DatabaseServiceLocator is a service locator for generic connections to common da
 ##Requirements
 
 ###Dependencies
-This library requires PHP 5.4 or later, and has no dependencies except from Fabien Potencier's [Pimple](https://github.com/fabpot/Pimple) library. 
+None except from Fabien Potencier's [Pimple](https://github.com/fabpot/Pimple) library. 
 
 
 
 ###Installation
 
-This library is installable and autoloadable via Composer. During installation, Composer will suggest to install [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0), if you have not already. Install from command line or add the following `require` element in your `composer.json` file:
+This library is installable and autoloadable via Composer. During installation, Composer will suggest to install [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0), if you have not already. Install from command line or `composer.json` file:
 
+#####Command line
+    
+    composer require tomykle/databases
+
+#####composer.json
     "require": {
         "tomkyle/databases": "dev-master"
     }
@@ -60,21 +74,57 @@ Assume your project deals with a couple of different databases, with credentials
 
 ###Configuration options
 
-######Mandatory
-If one of these fields is empty or missing, an `RuntimException` will be thrown.
+If one of these fields is empty or missing, a `RuntimeException` will be thrown:
 
 - **host:** The host name
 - **database:** The name of the database
 - **user** or **username:** the database user
 - **pass** or **password:** the database password
 
-######Optional
+Optional fields, with default values according to MySQL:
+
 - **charset:** the charset to use, defaults to `utf8`
 - **type:** the database type, defaults to `mysql`
 - **port:** the database port, defaults to `3306`
 
 
 ##Usage
+
+###Single Database
+1. Describe your database connection in array or StdClass
+2. Pass database description to new DatabaseConfig object
+3. Pass DabaseConfig to new DatabaseFactory
+4. Let factory create generic connection 
+
+```php
+// 1a. Describe your database as array:
+$describe = array(
+  'host'     => "localhost",
+  'database' => "database1",
+  'user'     => "root",
+  'pass'     => "secret",
+  'charset'  => "utf8"
+);
+
+// 1b. Describe your database as StdClass:
+$describe = json_decode('{
+  "host":     "localhost"
+  // ...truncated...
+}');
+
+// 2. Setup DatabaseConfig instance:
+$config = new DatabaseConfig( $describe );
+
+// 3. Create DatabaseFactory instance:
+$factory = new DatabaseFactory( $config );
+
+// 4. Let factory create Aura.SQL connection:
+$aura = $factory->getAuraSql();
+```
+
+
+
+###Multiple Databases
 
 1. Parse config contents into a `StdClass` object
 2. Create a new instance of `DatabaseServiceLocator`,  
