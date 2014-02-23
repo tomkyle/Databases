@@ -8,6 +8,7 @@ before_script:
   - composer require --dev aura/sql:dev-master
   - composer install --dev --no-interaction
 
+
 script:
   - mkdir -p build/logs
   - phpunit
