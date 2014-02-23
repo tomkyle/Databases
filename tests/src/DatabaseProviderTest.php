@@ -47,6 +47,9 @@ class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 
 
     /**
+     * Tests DatabaseProvider's protected method defineServices,
+     * i.e. if it returns the DatabaseProvider (fluent interface)
+     *
      * @dataProvider provideValidCtorArguments
      */
     public function testFluentInterfaceOfProtectedMethodDefineServices($valid)

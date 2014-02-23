@@ -10,10 +10,12 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
      * Checks if Test Suite is run on Travis CI.
      *
      * @return boolean
+     *
+     * @see  http://docs.travis-ci.com/user/ci-environment/
      */
     public function isTravisCi()
     {
-        return (isset($_SERVER['ci'])
+        return (isset($_SERVER['CI'])
             and isset($_SERVER['TRAVIS'])
             and $_SERVER['CI']     == "true"
             and $_SERVER['TRAVIS'] == "true");
@@ -22,7 +24,7 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Returns valid database data for MySQL on Travis CI.
      *
-     * See `.travis.yml` config file and documentation on Travis CI
+     * See `.travis.yml` config file and documentation on Travis CI.
      *
      * @return boolean
      * @see  http://docs.travis-ci.com/user/database-setup/
