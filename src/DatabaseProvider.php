@@ -28,7 +28,7 @@ use \Pimple;
 use \Aura\Sql\ConnectionFactory as AuraConnectionFactory;
 
 /**
- * DatabaseFactory
+ * DatabaseProvider
  *
  * Provides you with methods for creating generic connections
  * to PDO, mysqli and Aura.SQL. Requires Pimple as base class.
@@ -44,7 +44,7 @@ use \Aura\Sql\ConnectionFactory as AuraConnectionFactory;
  *    $description->pass     =  "db_pass"; // and so on
  *
  *    // Create factory
- *    $factory = new DatabaseFactory ( new DatabaseConfig ( $description ) );
+ *    $factory = new DatabaseProvider ( new DatabaseConfig ( $description ) );
  *
  *    // Grab your connection
  *    $aura   = $factory->getAuraSql();
@@ -79,7 +79,7 @@ class DatabaseProvider extends Pimple implements DatabaseProviderInterface
  * Note that for Aura.SQL connections, a generic PDO connection is used.
  * For details, see http://harikt.com/blog/2012/12/06/node-227/
  *
- * @return DatabaseFactory Fluent Interface
+ * @return DatabaseProvider Fluent Interface
  * @uses   \Aura\Sql\ConnectionFactory
  * @uses   \Aura\Sql\ConnectionFactory::newInstance()
  * @uses   \Aura\Sql\ConnectionFactory::setPdo()
