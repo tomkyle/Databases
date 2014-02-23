@@ -6,10 +6,11 @@
 
     "description": "Creates generic connections to common database APIs, provided by easy-to-use connection factories. For multiple databases, a Service Locator helps you creating those factories.",
 
-    "keywords":   ["database", "conenction", "factory", "mysql", "pdo", "aura", "sql", "php", "dic", , "service locator", "mysqli"],
+    "keywords":   ["database", "connection", "factory", "mysql", "pdo", "aura", "sql", "php", "dic", "service locator", "mysqli"],
 
 
     "license": "MIT",
+
     "authors": [
         {
             "name":  "Carsten Witt",
