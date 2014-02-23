@@ -59,22 +59,22 @@ class DatabaseServiceLocatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function createTwoDimArrayConfigArgument()
     {
-        return [
-            'db1' => [
-                'host' =>     "localhost",
+        return array(
+            'db1' => array(
+                'host'     => "localhost",
                 'database' => "database1",
-                'user' =>     "root",
-                'pass' =>     "secret",
-                'charset' =>  "utf8"
-            ],
-            'db2' => [
-                'host' =>     "localhost",
+                'user'     => "root",
+                'pass'     => "secret",
+                'charset'  => "utf8"
+            ),
+            'db2' => array(
+                'host'     => "localhost",
                 'database' => "database2",
-                'user' =>     "root",
-                'pass' =>     "password",
-                'charset' =>  "utf8"
-            ]
-        ];
+                'user'     => "root",
+                'pass'     => "password",
+                'charset'  => "utf8"
+            )
+        );
     }
 
     /**

@@ -39,6 +39,31 @@ class DatabaseConfigTest extends \PHPUnit_Framework_TestCase
             new DatabaseConfig( $valid ));
     }
 
+
+    /**
+     * Tests the return values of all Getter methods,
+     * given full configuration.
+     */
+    public function testInterceptors()
+    {
+        $dc = new DatabaseConfig( $this->createFullArrayConfigArgument() );
+
+        $this->assertTrue(
+            is_string($dc->getHost())
+        and is_string($dc->getDatabase())
+        and is_string($dc->getUser())
+        and is_string($dc->getType())
+        and is_string($dc->getPassword())
+        and is_string($dc->getCharset())
+        and (
+            is_int($dc->getPort())
+         or is_string($dc->getPort()))
+
+        );
+    }
+
+
+
     /**
      * Returns a set of invalid (wrong) ctor arguments.
      */
@@ -69,30 +94,48 @@ class DatabaseConfigTest extends \PHPUnit_Framework_TestCase
     public function provideIncompleteCtorArguments()
     {
         return array(
-            array([
+            array(array(
                 // 'host' =>     "localhost",
                 'database' => "database1",
                 'user' =>     "root",
                 'pass' =>     "secret"
-            ]),
-            array([
+            )),
+            array(array(
                 'host' =>     "localhost",
                 // 'database' => "database1",
                 'user' =>     "root",
                 'pass' =>     "secret"
-            ]),
-            array([
+            )),
+            array(array(
                 'host' =>     "localhost",
                 'database' => "database1",
                 // 'user' =>     "root",
                 'pass' =>     "secret"
-            ]),
-            array([
+            )),
+            array(array(
                 'host' =>     "localhost",
                 'database' => "database1",
                 'user' =>     "root",
                 // 'pass' =>     "secret"
-            ])
+            ))
+        );
+    }
+
+    /**
+     * Creates a valid, fully-configured array argument.
+     *
+     * @return array
+     */
+    protected function createFullArrayConfigArgument()
+    {
+        return array(
+            'host' =>     "localhost",
+            'database' => "database1",
+            'user' =>     "root",
+            'pass' =>     "secret",
+            'charset' =>  "utf8",
+            'type' =>     "mysql",
+            'port' =>     3306
         );
     }
 
@@ -103,13 +146,12 @@ class DatabaseConfigTest extends \PHPUnit_Framework_TestCase
      */
     protected function createArrayConfigArgument()
     {
-        return [
-                'host' =>     "localhost",
-                'database' => "database1",
-                'user' =>     "root",
-                'pass' =>     "secret",
-                'charset' =>  "utf8"
-            ];
+        return array(
+            'host' =>     "localhost",
+            'database' => "database1",
+            'user' =>     "root",
+            'pass' =>     "secret"
+        );
     }
 
     /**

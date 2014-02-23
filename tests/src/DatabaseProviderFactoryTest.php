@@ -20,6 +20,9 @@ class DatabaseProviderFactoryTest extends \PHPUnit_Framework_TestCase
             '\tomkyle\Databases\DatabaseProvider', $provider->newInstance($valid));
     }
 
+
+
+
     /**
      * Returns a set of valid ctor arguments.
      */
