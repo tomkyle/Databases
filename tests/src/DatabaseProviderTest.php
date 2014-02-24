@@ -17,6 +17,9 @@ class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+
+        var_dump($GLOBALS);
+
         $this->pdo = new PDO($GLOBALS['db_dsn'], $GLOBALS['db_username'], $GLOBALS['db_password']);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->query("CREATE TABLE IF NOT EXISTS hello (what VARCHAR(50) NOT NULL)");
