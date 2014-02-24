@@ -7,6 +7,27 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * @var PDO
+     */
+    private $pdo;
+
+
+    public function setUp()
+    {
+        if (!$this->isTravisCi()) {
+            return true;
+        }
+        // DB = mysql
+        $this->pdo = new PDO(
+            $GLOBALS['db_dsn'],
+            $GLOBALS['db_username'],
+            $GLOBALS['db_password']);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->query("CREATE TABLE IF NOT EXISTS hello (what VARCHAR(50) NOT NULL)");
+    }
+
+
+    /**
      * Checks if Test Suite is run on Travis CI.
      *
      * @return boolean
@@ -24,7 +45,11 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Returns valid database data for MySQL on Travis CI.
      *
-     * See `.travis.yml` config file and documentation on Travis CI.
+     * See:
+     *
+     *   - `.travis.yml` config file
+     *   - `phpunit.xml.dist` config file
+     *   - and documentation on Travis CI.
      *
      * @return boolean
      * @see  http://docs.travis-ci.com/user/database-setup/
@@ -32,11 +57,11 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
     public function getTravisMysqlDatabaseDescription()
     {
         return array(
-          'host'     => "127.0.0.1",
-          'database' => "tomkyle_test",
-          'user'     => "travis",
-          'pass'     => "",
-          'type'     => "mysql"
+          'host'     => $GLOBALS['db_host'],
+          'database' => $GLOBALS['db_database'],
+          'user'     => $GLOBALS['db_username'],
+          'pass'     => $GLOBALS['db_password'],
+          'type'     => $_SERVER['DB']
         );
     }
 
