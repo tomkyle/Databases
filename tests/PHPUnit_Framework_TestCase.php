@@ -12,19 +12,31 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
     private $pdo;
 
 
+
     public function setUp()
     {
         if (!$this->isTravisCi()) {
             return true;
         }
-        // DB = mysql
-        $this->pdo = new PDO(
+        // $S_SERVER['DB'] = mysql
+        $this->pdo = new \PDO(
             $GLOBALS['db_dsn'],
             $GLOBALS['db_username'],
             $GLOBALS['db_password']);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $this->pdo->query("CREATE TABLE IF NOT EXISTS hello (what VARCHAR(50) NOT NULL)");
     }
+
+
+
+    public function tearDown()
+    {
+        if (!$this->isTravisCi()) {
+            return true;
+        }
+        $this->pdo->query("DROP TABLE hello");
+    }
+
 
 
     /**

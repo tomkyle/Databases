@@ -4,7 +4,6 @@ namespace tests;
 use \tomkyle\Databases\DatabaseProvider;
 use \tomkyle\Databases\DatabaseConfig;
 use \tomkyle\Databases\DatabaseConfigInterface;
-use \PDO;
 
 class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 {
