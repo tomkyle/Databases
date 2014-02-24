@@ -9,6 +9,9 @@ class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 {
 
 
+
+
+
     /**
      * Test DatabaseProvider against a MySQL-Database on Travis CI.
      *

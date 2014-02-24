@@ -6,6 +6,7 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
 {
 
 
+
     /**
      * @var PDO
      */
@@ -13,6 +14,9 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
 
 
 
+    /**
+     * Creates test table, only on Travis CI
+     */
     public function setUp()
     {
         if (!$this->isTravisCi()) {
@@ -28,7 +32,9 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
     }
 
 
-
+    /**
+     * Drop test table, only on Travis CI
+     */
     public function tearDown()
     {
         if (!$this->isTravisCi()) {
@@ -36,7 +42,6 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
         }
         $this->pdo->query("DROP TABLE hello");
     }
-
 
 
     /**
@@ -55,7 +60,8 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns valid database data for MySQL on Travis CI.
+     * Returns valid database data for MySQL on Travis CI
+     * as defined in Travis and PHPUnit configuration files.
      *
      * See:
      *
@@ -64,7 +70,7 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
      *   - and documentation on Travis CI.
      *
      * @return boolean
-     * @see  http://docs.travis-ci.com/user/database-setup/
+     * @see http://docs.travis-ci.com/user/database-setup/
      */
     public function getTravisMysqlDatabaseDescription()
     {
@@ -86,9 +92,10 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
      * @param string $methodName Method name to call
      * @param array  $parameters Array of parameters to pass into method.
      *
-     * @return mixed Method return.
+     * @return mixed Method's return value.
      *
-     * @see  https://jtreminio.com/2013/03/unit-testing-tutorial-part-3-testing-protected-private-methods-coverage-reports-and-crap/
+     * @author Juan Treminio <https://jtreminio.com>
+     * @see    https://jtreminio.com/2013/03/unit-testing-tutorial-part-3-testing-protected-private-methods-coverage-reports-and-crap/
      */
     public function invokeMethod(&$object, $methodName, array $parameters = array())
     {
