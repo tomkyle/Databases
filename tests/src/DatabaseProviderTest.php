@@ -4,9 +4,24 @@ namespace tests;
 use \tomkyle\Databases\DatabaseProvider;
 use \tomkyle\Databases\DatabaseConfig;
 use \tomkyle\Databases\DatabaseConfigInterface;
+use \PDO;
 
 class DatabaseProviderTest extends \tomkyle\PHPUnit_Framework_TestCase
 {
+
+
+    /**
+     * @var PDO
+     */
+    private $pdo;
+
+    public function setUp()
+    {
+        $this->pdo = new PDO($GLOBALS['db_dsn'], $GLOBALS['db_username'], $GLOBALS['db_password']);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->query("CREATE TABLE hello (what VARCHAR(50) NOT NULL)");
+    }
+
 
     /**
      * Test DatabaseProvider against a MySQL-Database on Travis CI.
