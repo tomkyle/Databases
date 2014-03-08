@@ -3,7 +3,7 @@
 ##1.0.2
 Release date: 2014/03/08
 
-Using Scrutinizr badge
+Tried Scrutinizr, looks good, use badge.
 
 
 ##1.0.1
