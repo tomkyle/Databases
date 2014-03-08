@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6a453a2220a74f7919b6ea99cb4e1511",
+    "hash": "48e051c96fd6f48206140f7f858e7789",
     "packages": [
         {
             "name": "pimple/pimple",
-            "version": "dev-master",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Pimple.git",
-                "reference": "30651c5b19e1ec24e26d33c1600fc09ea3802f7a"
+                "reference": "f99b3df12991c22463927aa6a18fd9b2212917f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Pimple/zipball/30651c5b19e1ec24e26d33c1600fc09ea3802f7a",
-                "reference": "30651c5b19e1ec24e26d33c1600fc09ea3802f7a",
+                "url": "https://api.github.com/repos/fabpot/Pimple/zipball/f99b3df12991c22463927aa6a18fd9b2212917f2",
+                "reference": "f99b3df12991c22463927aa6a18fd9b2212917f2",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2014-02-11 08:54:01"
+            "time": "2014-02-10 08:05:32"
         }
     ],
     "packages-dev": [
@@ -569,7 +569,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "pimple/pimple": 20,
         "satooshi/php-coveralls": 20
     },
     "platform": {
