@@ -1,5 +1,11 @@
 #Changelog
 
+##1.0.2
+Release date: 2014/03/08
+
+Tried Scrutinizr, looks good, use badge.
+
+
 ##1.0.1
 Release date: 2014/03/08
 
