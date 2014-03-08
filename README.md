@@ -27,7 +27,7 @@ This Databases Connection Factory & Service Locator creates generic connections 
 
 ##Installation
 
-This library has no dependencies except from Fabien Potencier's [Pimple](https://github.com/fabpot/Pimple) library. It is installable and autoloadable via Composer. During installation, Composer will suggest to install [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0), if you have not already. Install from command line or `composer.json` file:
+This library has no dependencies except from Fabien Potencier's [Pimple](https://github.com/fabpot/Pimple) library v1 or v2. It is installable and autoloadable via Composer. During installation, Composer will suggest to install [Aura.SQL v1.3](http://github.com/auraphp/Aura.Sql/tree/1.3.0), if you have not already. Install from command line or `composer.json` file:
 
 #####Command line
     
@@ -35,7 +35,7 @@ This library has no dependencies except from Fabien Potencier's [Pimple](https:/
 
 #####composer.json
     "require": {
-        "tomkyle/databases": "dev-master"
+        "tomkyle/databases": "~1.0"
     }
 
 
