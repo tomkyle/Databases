@@ -2,9 +2,6 @@
 
 This Databases Connection Factory & Service Locator creates generic connections to common database APIs, provided by easy-to-use connection factories. When working with multiple databases, a Service Locator helps you creating those factories. It supports [PDO](http://de.php.net/manual/en/book.pdo.php), [mysqli](http://www.php.net/manual/en/book.mysqli.php) and [Aura.SQL v1.3](https://github.com/auraphp/Aura.Sql/tree/master).
 
-
-
-
 [![Build Status](https://travis-ci.org/tomkyle/Databases.png?branch=master)](https://travis-ci.org/tomkyle/Databases)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/tomkyle/Databases/badges/quality-score.png?s=54034d47b7bf4a47315e94af685db4ecd5f61196)](https://scrutinizer-ci.com/g/tomkyle/Databases/)
 [![Coverage Status](https://coveralls.io/repos/tomkyle/Databases/badge.png?branch=master)](https://coveralls.io/r/tomkyle/Databases?branch=master)
