@@ -1,9 +1,16 @@
 #Changelog
 
+##1.0.5
+Release date: 2014/03/10
+
+Reduced complexity
+
+
 ##1.0.4
 Release date: 2014/03/10
 
 Call Pimple's offsetSet methods, see Issue #1
+
 
 ##1.0.3
 Release date: 2014/03/10
