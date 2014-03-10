@@ -93,19 +93,19 @@ class DatabaseProvider extends Pimple implements DatabaseProviderInterface
  */
     protected function defineServices()
     {
-        $this['aura.connectionfactory'] = function () {
+        $this->offsetSet('aura.connectionfactory', function () {
             return new AuraConnectionFactory;
-        };
+        });
 
-        $this['aura.sql'] = function () {
+        $this->offsetSet('aura.sql', function () {
             $config = $this['config'];
             $aura   = $this['aura.connectionfactory']->newInstance( $config->getType() );
             $aura->setPdo( $this['pdo'] );
 
             return $aura;
-        };
+        });
 
-        $this['pdo'] = function () {
+        $this->offsetSet('pdo', function () {
             $config = $this['config'];
             $dsn = "%s:dbname=%s;host=%s;port=%s;charset=%s";
 
@@ -120,9 +120,9 @@ class DatabaseProvider extends Pimple implements DatabaseProviderInterface
                 $config->getUser(),
                 $config->getPassword()
             );
-        };
+        });
 
-        $this['mysqli'] = function () {
+        $this->offsetSet('mysqli', function () {
             $config = $this['config'];
 
             $mysqli = mysqli_connect(
@@ -135,7 +135,7 @@ class DatabaseProvider extends Pimple implements DatabaseProviderInterface
             $mysqli->set_charset( $config->getCharset() );
 
             return $mysqli;
-        };
+        });
 
         return $this;
     }
