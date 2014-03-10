@@ -1,5 +1,11 @@
 #Changelog
 
+##1.0.3
+Release date: 2014/03/10
+
+Fixed unsharp paramteter check, see Issue #3
+
+
 ##1.0.2
 Release date: 2014/03/08
 
