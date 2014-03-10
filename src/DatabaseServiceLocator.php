@@ -42,8 +42,11 @@ class DatabaseServiceLocator extends Pimple implements DatabaseServiceLocatorInt
  */
     public function __construct($databases, DatabaseProviderFactory $factory_factory = null)
     {
-        if (!is_array( $databases )
-        and !$databases instanceOf \StdClass) {
+        if ($databases instanceOf \StdClass) {
+            $databases = get_object_vars($databases);
+        }
+
+        if (!is_array( $databases )) {
             throw new \InvalidArgumentException("Associative Array or StdClass expected.");
         }
 
