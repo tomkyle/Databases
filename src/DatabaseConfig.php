@@ -117,22 +117,13 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
             throw new \InvalidArgumentException("Associative Array or StdClass expected.");
         }
 
-        // (usually mandatory)
-        if (isset($config->host))     $this->setHost(     $config->host );
-        if (isset($config->database)) $this->setDatabase( $config->database );
-        if (isset($config->user))     $this->setUser(     $config->user );
-        if (isset($config->username)) $this->setUser(     $config->username );
-        if (isset($config->pass))     $this->setPassword( $config->pass );
-        if (isset($config->password)) $this->setPassword( $config->password );
+        $this->applyMandatoryFields( $config );
+
+        $this->applyOptionalFields( $config );
 
         if (!$this->valid()) {
             throw new \RuntimeException("Mandatory field(s) missing, check configuration paramters.");
         }
-
-        // (optional, defaulting to mysql)
-        if (isset($config->charset))  $this->setCharset(  $config->charset );
-        if (isset($config->type))     $this->setType(     $config->type );
-        if (isset($config->port))     $this->setPort(     $config->port );
 
         return $this;
     }
@@ -157,5 +148,41 @@ class DatabaseConfig extends DatabaseConfigAbstract implements DatabaseConfigInt
            and !is_null($this->getPassword()));
         return $f;
     }
+
+
+    /**
+     * Imports manadatory configuration vars.
+     * @param  array|object $config Database description.
+     * @return DatabaseConfig Fluent Interface
+     */
+    protected function applyMandatoryFields( $config )
+    {
+        if (isset($config->host))     $this->setHost(     $config->host );
+        if (isset($config->database)) $this->setDatabase( $config->database );
+        if (isset($config->user))     $this->setUser(     $config->user );
+        if (isset($config->username)) $this->setUser(     $config->username );
+        if (isset($config->pass))     $this->setPassword( $config->pass );
+        if (isset($config->password)) $this->setPassword( $config->password );
+
+        return $this;
+    }
+
+
+    /**
+     * Imports optional configuration vars.
+     *
+     * @param  array|object $config Database description.
+     * @return DatabaseConfig Fluent Interface
+     */
+    protected function applyOptionalFields( $config )
+    {
+        // (optional, defaulting to mysql)
+        if (isset($config->charset))  $this->setCharset(  $config->charset );
+        if (isset($config->type))     $this->setType(     $config->type );
+        if (isset($config->port))     $this->setPort(     $config->port );
+
+        return $this;
+    }
+
 
 }
