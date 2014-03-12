@@ -49,6 +49,10 @@ Now that you have your `DatabaseConfig` ready, simply pass to new `DatabaseProvi
 
 ###Example
 ```php
+<?php
+use \tomkyle\Databases\DatabaseConfig;
+use \tomkyle\Databases\DatabaseProvider;
+
 // 1a. Describe your database as array:
 $describe = array(
   'host'     => "localhost",
@@ -179,6 +183,9 @@ Assume your project deals with a couple of different databases, with credentials
 4. Let factory create generic connection:
 
 ```php
+<?php
+use \tomkyle\Databases\DatabaseServiceLocator;
+
 $config = json_decode( file_get_contents( 'config.json' ));
 $databases = new DatabaseServiceLocator( $config );
 
