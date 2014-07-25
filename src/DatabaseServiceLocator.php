@@ -24,7 +24,7 @@
  */
 namespace tomkyle\Databases;
 
-use \Pimple;
+use \Pimple\Container as Pimple;
 
 /**
  * DatabaseServiceLocator - Main class
