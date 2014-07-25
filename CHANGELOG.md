@@ -1,5 +1,9 @@
 #Changelog
 
+##1.0.7
+Release date: 2014/07/25
+- Fixed Pimple dependency version number.
+
 ##1.0.6
 Release date: 2014/03/12
 
