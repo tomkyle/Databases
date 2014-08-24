@@ -1,8 +1,8 @@
 <?php
-namespace tomkyle;
+namespace tests;
 
 
-class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
+class TestCaseBaseClass extends \PHPUnit_Framework_TestCase
 {
 
 
