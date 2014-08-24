@@ -42,6 +42,7 @@ Icon
 # Project files #
 ######################
 vendor
+composer.lock
 node_modules
 tests/build
 build

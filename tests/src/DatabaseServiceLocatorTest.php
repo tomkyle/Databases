@@ -3,7 +3,7 @@ namespace tests;
 
 use \tomkyle\Databases\DatabaseServiceLocator;
 
-class DatabaseServiceLocatorTest extends \tomkyle\PHPUnit_Framework_TestCase
+class DatabaseServiceLocatorTest extends TestCaseBaseClass
 {
 
     /**
