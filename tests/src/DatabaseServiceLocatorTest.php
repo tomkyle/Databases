@@ -8,9 +8,6 @@ class DatabaseServiceLocatorTest extends \tomkyle\PHPUnit_Framework_TestCase
 
     /**
      * Test DatabaseServiceLocator against a MySQL-Database on Travis CI.
-     *
-     * @uses  \tomkyle\PHPUnit_Framework_TestCase::isTravisCi()
-     * @uses  \tomkyle\PHPUnit_Framework_TestCase::getTravisMysqlDatabaseDescription()
      */
     public function testConnectionFactoriesMethodsOnTravisMySql()
     {
