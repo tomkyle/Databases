@@ -1,5 +1,10 @@
 #Changelog
 
+##1.0.12
+Release date: 2015/01/15
+- Changed Pimple dependency version number to `~3.0`
+
+
 ##1.0.7
 Release date: 2014/07/25
 - Fixed Pimple dependency version number.
